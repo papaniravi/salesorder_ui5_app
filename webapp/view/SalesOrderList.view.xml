@@ -20,10 +20,9 @@
                 type="Emphasized"/>
         </headerContent>
         <content>
-            <VBox id="kpiSection" class="sapUiSmallMargin">
-                <!-- KPI Section with 3D Cards -->
+            <!-- KPI Section -->
+            <VBox id="kpiSection" class="sapUiSmallMargin" alignItems="Center">
                 <FlexBox id="kpiContainer" wrap="Wrap" justifyContent="SpaceAround" class="kpiFlexContainer">
-
                     <!-- Total Orders KPI -->
                     <GenericTile
                         id="totalOrdersTile"
@@ -108,7 +107,8 @@
             </VBox>
 
             <!-- Filter Panel -->
-            <Panel id="filterPanel" headerText="Filters" expandable="true" expanded="false" class="sapUiResponsiveMargin">
+            <VBox alignItems="Center" class="sapUiSmallMargin">
+            <Panel id="filterPanel" headerText="Filters" expandable="true" expanded="false" width="100%">
                 <content>
                     <VBox id="filterBox" class="sapUiSmallMargin">
                         <HBox id="filterRow1" class="sapUiTinyMarginBottom">
@@ -158,8 +158,10 @@
                     </VBox>
                 </content>
             </Panel>
+            </VBox>
 
             <!-- Scrollable Table Container -->
+            <VBox alignItems="Center" class="sapUiSmallMargin">
             <VBox id="tableContainer" class="sapUiSmallMargin">
                 <ScrollContainer id="tableScrollContainer" height="500px" vertical="true" horizontal="false">
                     <Table
@@ -256,6 +258,7 @@
                 </items>
                     </Table>
                 </ScrollContainer>
+            </VBox>
             </VBox>
         </content>
     </Page>

@@ -8,12 +8,25 @@
     background-color: #f5f5f5;
 }
 
+.sapMPageEnableScrolling {
+    display: flex;
+    justify-content: center;
+}
+
+.sapMPageContent {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
 /* 3D KPI Tiles with Gradient Colors */
 .kpiFlexContainer {
     padding: 1rem;
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     border-radius: 12px;
-    margin-bottom: 1rem;
+    margin: 0 auto 1rem auto;
+    max-width: 1400px;
+    width: 100%;
 }
 
 .kpiTile {
@@ -134,6 +147,8 @@
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    width: 100%;
+    max-width: 1400px;
 }
 
 #filterPanel .sapMPanelHdr {
@@ -192,6 +207,8 @@
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     padding: 1rem;
+    width: 100%;
+    max-width: 1400px;
 }
 
 #tableScrollContainer {
