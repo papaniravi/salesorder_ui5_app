@@ -15,8 +15,9 @@
 
 .sapMPageContent {
     width: 100%;
-    max-width: 1600px;
+    max-width: 1400px;
     margin: 0 auto;
+    padding: 0 1rem;
 }
 
 /* 3D KPI Tiles with Gradient Colors */
@@ -24,8 +25,7 @@
     padding: 1rem;
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     border-radius: 12px;
-    margin: 0 auto 1rem auto;
-    max-width: 1400px;
+    margin: 0 0 1rem 0;
     width: 100%;
 }
 
@@ -148,7 +148,6 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
     width: 100%;
-    max-width: 1400px;
 }
 
 #filterPanel .sapMPanelHdr {
@@ -208,7 +207,6 @@
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     padding: 1rem;
     width: 100%;
-    max-width: 1400px;
 }
 
 #tableScrollContainer {
