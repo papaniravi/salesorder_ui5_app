@@ -1,0 +1,29 @@
+{
+  "xsappname": "salesorder-ui5-app",
+  "tenant-mode": "dedicated",
+  "description": "Security profile of Sales Order UI5 Application",
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.Display",
+      "description": "Display sales orders"
+    }
+  ],
+  "role-templates": [
+    {
+      "name": "SalesOrderViewer",
+      "description": "Sales Order Viewer Role",
+      "scope-references": [
+        "$XSAPPNAME.Display"
+      ]
+    }
+  ],
+  "role-collections": [
+    {
+      "name": "SalesOrderViewerCollection",
+      "description": "Sales Order Viewer Collection",
+      "role-template-references": [
+        "$XSAPPNAME.SalesOrderViewer"
+      ]
+    }
+  ]
+}

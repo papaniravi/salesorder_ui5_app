@@ -1,0 +1,123 @@
+<mvc:View
+    controllerName="salesorder.ui5.app.controller.SalesOrderDetail"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    displayBlock="true">
+    <Page
+        id="salesOrderDetailPage"
+        title="{i18n>salesOrderDetailTitle}"
+        showNavButton="true"
+        navButtonPress=".onNavBack">
+        <content>
+            <ObjectHeader
+                id="salesOrderHeader"
+                title="{SalesOrder}"
+                number="{
+                    path: 'TotalNetAmount',
+                    type: 'sap.ui.model.type.Float',
+                    formatOptions: {
+                        maxFractionDigits: 2,
+                        minFractionDigits: 2
+                    }
+                }"
+                numberUnit="{TransactionCurrency}">
+                <attributes>
+                    <ObjectAttribute title="{i18n>customerLabel}" text="{SoldToParty}"/>
+                    <ObjectAttribute title="{i18n>orderDateLabel}" text="{
+                        path: 'SalesOrderDate',
+                        type: 'sap.ui.model.type.Date',
+                        formatOptions: {
+                            pattern: 'dd/MM/yyyy'
+                        }
+                    }"/>
+                    <ObjectAttribute title="{i18n>orderTypeLabel}" text="{SalesOrderType}"/>
+                </attributes>
+            </ObjectHeader>
+
+            <IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
+                <items>
+                    <IconTabFilter text="{i18n>detailsTab}" key="details">
+                        <f:SimpleForm
+                            editable="false"
+                            layout="ResponsiveGridLayout"
+                            labelSpanXL="4"
+                            labelSpanL="4"
+                            labelSpanM="4"
+                            labelSpanS="12"
+                            adjustLabelSpan="false"
+                            emptySpanXL="0"
+                            emptySpanL="0"
+                            emptySpanM="0"
+                            emptySpanS="0"
+                            columnsXL="2"
+                            columnsL="2"
+                            columnsM="1"
+                            singleContainerFullSize="false">
+                            <f:content>
+                                <Label text="{i18n>salesOrderLabel}"/>
+                                <Text text="{SalesOrder}"/>
+
+                                <Label text="{i18n>soldToPartyLabel}"/>
+                                <Text text="{SoldToParty}"/>
+
+                                <Label text="{i18n>purchaseOrderLabel}"/>
+                                <Text text="{PurchaseOrderByCustomer}"/>
+
+                                <Label text="{i18n>salesOrgLabel}"/>
+                                <Text text="{SalesOrganization}"/>
+
+                                <Label text="{i18n>distributionChannelLabel}"/>
+                                <Text text="{DistributionChannel}"/>
+
+                                <Label text="{i18n>divisionLabel}"/>
+                                <Text text="{OrganizationDivision}"/>
+                            </f:content>
+                        </f:SimpleForm>
+                    </IconTabFilter>
+
+                    <IconTabFilter text="{i18n>itemsTab}" key="items">
+                        <Table
+                            items="{path: 'to_Item'}">
+                            <columns>
+                                <Column>
+                                    <Text text="{i18n>itemColumn}"/>
+                                </Column>
+                                <Column>
+                                    <Text text="{i18n>materialColumn}"/>
+                                </Column>
+                                <Column hAlign="End">
+                                    <Text text="{i18n>quantityColumn}"/>
+                                </Column>
+                                <Column hAlign="End">
+                                    <Text text="{i18n>netPriceColumn}"/>
+                                </Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem>
+                                    <cells>
+                                        <Text text="{SalesOrderItem}"/>
+                                        <Text text="{Material}"/>
+                                        <ObjectNumber
+                                            number="{RequestedQuantity}"
+                                            unit="{RequestedQuantityUnit}"/>
+                                        <ObjectNumber
+                                            number="{
+                                                path: 'NetAmount',
+                                                type: 'sap.ui.model.type.Float',
+                                                formatOptions: {
+                                                    maxFractionDigits: 2,
+                                                    minFractionDigits: 2
+                                                }
+                                            }"
+                                            unit="{TransactionCurrency}"/>
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </IconTabFilter>
+                </items>
+            </IconTabBar>
+        </content>
+    </Page>
+</mvc:View>

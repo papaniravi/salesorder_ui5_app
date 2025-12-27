@@ -1,0 +1,108 @@
+{
+  "_version": "1.59.0",
+  "sap.app": {
+    "id": "salesorder.ui5.app",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "1.0.0"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "dataSources": {
+      "salesOrderService": {
+        "uri": "/sap/opu/odata/sap/API_SALES_ORDER_SRV/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "rootView": {
+      "viewName": "salesorder.ui5.app.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "appView"
+    },
+    "dependencies": {
+      "minUI5Version": "1.120.0",
+      "libs": {
+        "sap.ui.core": {},
+        "sap.m": {},
+        "sap.ui.layout": {},
+        "sap.f": {}
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "salesorder.ui5.app.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "salesOrderService",
+        "preload": true,
+        "settings": {
+          "defaultBindingMode": "TwoWay",
+          "defaultCountMode": "Inline",
+          "useBatch": true
+        }
+      }
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "viewPath": "salesorder.ui5.app.view",
+        "controlId": "app",
+        "controlAggregation": "pages",
+        "async": true
+      },
+      "routes": [
+        {
+          "pattern": "",
+          "name": "salesOrderList",
+          "target": "salesOrderList"
+        },
+        {
+          "pattern": "salesOrder/{orderId}",
+          "name": "salesOrderDetail",
+          "target": "salesOrderDetail"
+        }
+      ],
+      "targets": {
+        "salesOrderList": {
+          "viewName": "SalesOrderList",
+          "viewLevel": 1
+        },
+        "salesOrderDetail": {
+          "viewName": "SalesOrderDetail",
+          "viewLevel": 2
+        }
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "salesorder-ui5-app",
+  "version": "1.0.0",
+  "description": "Sales Order UI5 Application",
+  "scripts": {
+    "start": "ui5 serve -o index.html",
+    "build": "ui5 build --all",
+    "deploy": "fiori deploy"
+  },
+  "devDependencies": {
+    "@sap/ux-ui5-tooling": "^1",
+    "@ui5/cli": "^3",
+    "ui5-task-zipper": "^3"
+  },
+  "ui5": {
+    "dependencies": [
+      "@sap/ux-ui5-tooling",
+      "ui5-task-zipper"
+    ]
+  }
+}

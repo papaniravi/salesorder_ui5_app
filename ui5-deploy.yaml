@@ -1,0 +1,12 @@
+specVersion: "3.0"
+metadata:
+  name: salesorder-ui5-app-deployer
+type: application
+builder:
+  customTasks:
+    - name: ui5-task-zipper
+      afterTask: generateCachebusterInfo
+      configuration:
+        archiveName: salesorder-ui5-app
+        additionalFiles:
+          - xs-app.json

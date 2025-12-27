@@ -1,0 +1,11 @@
+node_modules/
+dist/
+mta_archives/
+.che/
+fiori-tools.log
+*.mtar
+package-lock.json
+.env
+.DS_Store
+*.log
+resources/

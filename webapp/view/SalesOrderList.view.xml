@@ -1,0 +1,262 @@
+<mvc:View
+    controllerName="salesorder.ui5.app.controller.SalesOrderList"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:card="sap.f.cards"
+    xmlns:layout="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    displayBlock="true">
+    <Page
+        id="salesOrderListPage"
+        title="{i18n>salesOrderListTitle}"
+        class="sapUiResponsiveContentPadding">
+        <headerContent>
+            <Button
+                id="refreshButton"
+                icon="sap-icon://refresh"
+                press=".onRefresh"
+                tooltip="{i18n>refreshTooltip}"
+                type="Emphasized"/>
+        </headerContent>
+        <content>
+            <VBox id="kpiSection" class="sapUiSmallMargin">
+                <!-- KPI Section with 3D Cards -->
+                <FlexBox id="kpiContainer" wrap="Wrap" justifyContent="SpaceAround" class="kpiFlexContainer">
+
+                    <!-- Total Orders KPI -->
+                    <GenericTile
+                        id="totalOrdersTile"
+                        class="sapUiTinyMargin kpiTile kpiTileBlue"
+                        header="Total Orders"
+                        subheader="Active Sales Orders"
+                        press=".onKPIPress">
+                        <tileContent>
+                            <TileContent id="totalOrdersContent">
+                                <content>
+                                    <NumericContent
+                                        id="totalOrdersNumeric"
+                                        value="{viewModel>/totalOrders}"
+                                        icon="sap-icon://sales-order"
+                                        withMargin="false"/>
+                                </content>
+                            </TileContent>
+                        </tileContent>
+                    </GenericTile>
+
+                    <!-- Total Revenue KPI -->
+                    <GenericTile
+                        id="totalRevenueTile"
+                        class="sapUiTinyMargin kpiTile kpiTileGreen"
+                        header="Total Revenue"
+                        subheader="Overall Sales Value"
+                        press=".onKPIPress">
+                        <tileContent>
+                            <TileContent id="totalRevenueContent">
+                                <content>
+                                    <NumericContent
+                                        id="totalRevenueNumeric"
+                                        value="{viewModel>/totalRevenue}"
+                                        scale="M"
+                                        icon="sap-icon://money-bills"
+                                        withMargin="false"/>
+                                </content>
+                            </TileContent>
+                        </tileContent>
+                    </GenericTile>
+
+                    <!-- Average Order Value KPI -->
+                    <GenericTile
+                        id="avgOrderValueTile"
+                        class="sapUiTinyMargin kpiTile kpiTileOrange"
+                        header="Avg Order Value"
+                        subheader="Per Order"
+                        press=".onKPIPress">
+                        <tileContent>
+                            <TileContent id="avgOrderValueContent">
+                                <content>
+                                    <NumericContent
+                                        id="avgOrderValueNumeric"
+                                        value="{viewModel>/avgOrderValue}"
+                                        icon="sap-icon://bar-chart"
+                                        withMargin="false"/>
+                                </content>
+                            </TileContent>
+                        </tileContent>
+                    </GenericTile>
+
+                    <!-- Active Customers KPI -->
+                    <GenericTile
+                        id="totalCustomersTile"
+                        class="sapUiTinyMargin kpiTile kpiTilePurple"
+                        header="Customers"
+                        subheader="Unique Customers"
+                        press=".onKPIPress">
+                        <tileContent>
+                            <TileContent id="totalCustomersContent">
+                                <content>
+                                    <NumericContent
+                                        id="totalCustomersNumeric"
+                                        value="{viewModel>/totalCustomers}"
+                                        icon="sap-icon://customer"
+                                        withMargin="false"/>
+                                </content>
+                            </TileContent>
+                        </tileContent>
+                    </GenericTile>
+                </FlexBox>
+            </VBox>
+
+            <!-- Filter Panel -->
+            <Panel id="filterPanel" headerText="Filters" expandable="true" expanded="false" class="sapUiResponsiveMargin">
+                <content>
+                    <VBox id="filterBox" class="sapUiSmallMargin">
+                        <HBox id="filterRow1" class="sapUiTinyMarginBottom">
+                            <VBox id="salesOrderFilterBox" class="sapUiSmallMarginEnd" width="220px">
+                                <Label id="salesOrderLabel" text="Sales Order Number"/>
+                                <Input id="filterSalesOrder" placeholder="Enter Sales Order" submit=".onFilterApply" showValueHelp="true" valueHelpRequest=".onValueHelpSalesOrder"/>
+                            </VBox>
+                            <VBox id="customerFilterBox" class="sapUiSmallMarginEnd" width="220px">
+                                <Label id="customerLabel" text="Customer"/>
+                                <Input id="filterCustomer" placeholder="Enter Customer" submit=".onFilterApply" showValueHelp="true" valueHelpRequest=".onValueHelpCustomer"/>
+                            </VBox>
+                            <VBox id="createdByFilterBox" class="sapUiSmallMarginEnd" width="220px">
+                                <Label id="createdByLabel" text="Created By"/>
+                                <Input id="filterCreatedBy" placeholder="Enter User" submit=".onFilterApply" showValueHelp="true" valueHelpRequest=".onValueHelpCreatedBy"/>
+                            </VBox>
+                            <VBox id="salesOrgFilterBox" class="sapUiSmallMarginEnd" width="220px">
+                                <Label id="salesOrgLabel" text="Sales Organization"/>
+                                <Input id="filterSalesOrg" placeholder="Enter Sales Org" submit=".onFilterApply" showValueHelp="true" valueHelpRequest=".onValueHelpSalesOrg"/>
+                            </VBox>
+                        </HBox>
+                        <HBox id="filterRow2" class="sapUiTinyMarginBottom">
+                            <VBox id="createdOnFilterBox" class="sapUiSmallMarginEnd" width="200px">
+                                <Label id="createdOnLabel" text="Created On From"/>
+                                <DatePicker id="filterCreatedOnFrom" placeholder="Select Date" change=".onFilterApply"/>
+                            </VBox>
+                            <VBox id="createdOnToFilterBox" class="sapUiSmallMarginEnd" width="200px">
+                                <Label id="createdOnToLabel" text="Created On To"/>
+                                <DatePicker id="filterCreatedOnTo" placeholder="Select Date" change=".onFilterApply"/>
+                            </VBox>
+                            <VBox id="orderTypeFilterBox" class="sapUiSmallMarginEnd" width="200px">
+                                <Label id="orderTypeLabel" text="Order Type"/>
+                                <Select id="filterOrderType" change=".onFilterApply">
+                                    <items>
+                                        <core:Item key="" text="All"/>
+                                        <core:Item key="CBIC" text="CBIC"/>
+                                        <core:Item key="ZOR" text="ZOR"/>
+                                    </items>
+                                </Select>
+                            </VBox>
+                            <VBox id="filterButtonBox" class="sapUiSmallMarginEnd" justifyContent="End">
+                                <HBox>
+                                    <Button id="applyFilterBtn" text="Apply Filters" press=".onFilterApply" type="Emphasized" class="sapUiTinyMarginEnd"/>
+                                    <Button id="clearFilterBtn" text="Clear" press=".onFilterClear"/>
+                                </HBox>
+                            </VBox>
+                        </HBox>
+                    </VBox>
+                </content>
+            </Panel>
+
+            <!-- Scrollable Table Container -->
+            <VBox id="tableContainer" class="sapUiSmallMargin">
+                <ScrollContainer id="tableScrollContainer" height="500px" vertical="true" horizontal="false">
+                    <Table
+                        id="salesOrderTable"
+                        inset="false"
+                        growing="true"
+                        growingScrollToLoad="true"
+                        growingThreshold="20"
+                        items="{
+                            path: '/A_SalesOrder',
+                            parameters: {
+                                $select: 'SalesOrder,SoldToParty,SalesOrderDate,TotalNetAmount,TransactionCurrency,SalesOrderType,CreatedByUser,CreationDate,SalesOrganization,DistributionChannel,PurchaseOrderByCustomer',
+                                $top: '50',
+                                $inlinecount: 'allpages'
+                            }
+                        }">
+                        <headerToolbar>
+                            <OverflowToolbar id="tableToolbar">
+                                <Title id="tableTitle" text="{i18n>salesOrderTableTitle} ({viewModel>/totalOrders})"/>
+                                <ToolbarSpacer id="toolbarSpacer"/>
+                                <SearchField
+                                    id="searchField"
+                                    width="50%"
+                                    search=".onSearch"
+                                    placeholder="{i18n>searchPlaceholder}"/>
+                            </OverflowToolbar>
+                        </headerToolbar>
+                <columns>
+                    <Column id="orderIdColumn" width="12em">
+                        <Text text="{i18n>salesOrderColumn}"/>
+                    </Column>
+                    <Column id="customerColumn" minScreenWidth="Tablet" demandPopin="true">
+                        <Text text="{i18n>customerColumn}"/>
+                    </Column>
+                    <Column id="orderDateColumn" minScreenWidth="Tablet" demandPopin="true" hAlign="End">
+                        <Text text="{i18n>orderDateColumn}"/>
+                    </Column>
+                    <Column id="amountColumn" minScreenWidth="Desktop" demandPopin="true" hAlign="End">
+                        <Text text="{i18n>amountColumn}"/>
+                    </Column>
+                    <Column id="orderTypeColumn" minScreenWidth="Desktop" demandPopin="true">
+                        <Text text="{i18n>orderTypeColumn}"/>
+                    </Column>
+                    <Column id="statusColumn" minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+                        <Text text="Status"/>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem
+                        type="Navigation"
+                        press=".onItemPress"
+                        class="customListItem">
+                        <cells>
+                            <ObjectIdentifier
+                                title="{SalesOrder}"
+                                text="Order"
+                                class="orderIdentifier"/>
+                            <HBox alignItems="Center">
+                                <core:Icon src="sap-icon://customer" class="sapUiTinyMarginEnd" color="#0070f2"/>
+                                <Text text="{SoldToParty}"/>
+                            </HBox>
+                            <HBox alignItems="Center" justifyContent="End">
+                                <core:Icon src="sap-icon://calendar" class="sapUiTinyMarginEnd" color="#28a745"/>
+                                <Text text="{
+                                    path: 'SalesOrderDate',
+                                    type: 'sap.ui.model.type.Date',
+                                    formatOptions: {
+                                        pattern: 'dd/MM/yyyy'
+                                    }
+                                }"/>
+                            </HBox>
+                            <ObjectNumber
+                                number="{
+                                    path: 'TotalNetAmount',
+                                    type: 'sap.ui.model.type.Float',
+                                    formatOptions: {
+                                        maxFractionDigits: 2,
+                                        minFractionDigits: 2
+                                    }
+                                }"
+                                unit="{TransactionCurrency}"
+                                state="{= ${TotalNetAmount} > 1000 ? 'Success' : 'None' }"
+                                class="amountNumber"/>
+                            <HBox alignItems="Center">
+                                <core:Icon src="sap-icon://BusinessSuiteInAppSymbols/icon-order-status" class="sapUiTinyMarginEnd" color="#ff9800"/>
+                                <Text text="{SalesOrderType}"/>
+                            </HBox>
+                            <ObjectStatus
+                                text="Active"
+                                state="Success"
+                                icon="sap-icon://status-positive"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+                    </Table>
+                </ScrollContainer>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

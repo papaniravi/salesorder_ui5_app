@@ -1,0 +1,19 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <SelectDialog
+        id="valueHelpDialog"
+        title="Select Value"
+        confirm="onValueHelpConfirm"
+        search="onValueHelpSearch"
+        liveChange="onValueHelpSearch"
+        growing="true"
+        growingThreshold="20">
+        <items>
+            <StandardListItem
+                title="{SalesOrder}"
+                description="{SoldToParty}"
+                type="Active"/>
+        </items>
+    </SelectDialog>
+</core:FragmentDefinition>

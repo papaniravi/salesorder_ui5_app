@@ -1,0 +1,104 @@
+_schema-version: "3.2"
+ID: salesorder-ui5-app
+version: 1.0.0
+description: Sales Order UI5 Application
+parameters:
+  enable-parallel-deployments: true
+
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm install
+
+modules:
+  - name: salesorder-ui5-app-destination-content
+    type: com.sap.application.content
+    requires:
+      - name: salesorder-ui5-app-destination-service
+        parameters:
+          content-target: true
+      - name: salesorder-ui5-app-repo-host
+        parameters:
+          service-key:
+            name: salesorder-ui5-app-repo-host-key
+      - name: salesorder-ui5-app-uaa
+        parameters:
+          service-key:
+            name: salesorder-ui5-app-uaa-key
+    parameters:
+      content:
+        instance:
+          destinations:
+            - Name: salesorder_ui5_app_html_repo_host
+              ServiceInstanceName: salesorder-ui5-app-html5-srv
+              ServiceKeyName: salesorder-ui5-app-repo-host-key
+              sap.cloud.service: salesorder.ui5.app
+            - Authentication: OAuth2UserTokenExchange
+              Name: salesorder_ui5_app_uaa
+              ServiceInstanceName: salesorder-ui5-app-xsuaa-service
+              ServiceKeyName: salesorder-ui5-app-uaa-key
+              sap.cloud.service: salesorder.ui5.app
+          existing_destinations_policy: ignore
+    build-parameters:
+      no-source: true
+
+  - name: salesorder-ui5-app-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: salesorder-ui5-app-repo-host
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: dist
+      requires:
+        - artifacts:
+            - salesorderui5app.zip
+          name: salesorderui5app
+          target-path: dist/
+
+  - name: salesorderui5app
+    type: html5
+    path: .
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm run build
+      supported-platforms: []
+
+resources:
+  - name: salesorder-ui5-app-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      config:
+        HTML5Runtime_enabled: true
+        init_data:
+          instance:
+            destinations:
+              - Authentication: NoAuthentication
+                Name: ui5
+                ProxyType: Internet
+                Type: HTTP
+                URL: https://ui5.sap.com
+            existing_destinations_policy: update
+        version: 1.0.0
+      service: destination
+      service-name: salesorder-ui5-app-destination-service
+      service-plan: lite
+
+  - name: salesorder-ui5-app-uaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      path: ./xs-security.json
+      service: xsuaa
+      service-name: salesorder-ui5-app-xsuaa-service
+      service-plan: application
+
+  - name: salesorder-ui5-app-repo-host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-name: salesorder-ui5-app-html5-srv
+      service-plan: app-host

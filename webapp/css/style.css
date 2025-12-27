@@ -1,0 +1,235 @@
+/* Custom CSS for Sales Order Application with 3D Effects */
+
+.sapUiBody {
+    height: 100%;
+}
+
+.sapMPage {
+    background-color: #f5f5f5;
+}
+
+/* 3D KPI Tiles with Gradient Colors */
+.kpiFlexContainer {
+    padding: 1rem;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border-radius: 12px;
+    margin-bottom: 1rem;
+}
+
+.kpiTile {
+    min-width: 250px;
+    max-width: 280px;
+    border-radius: 16px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+    cursor: pointer;
+}
+
+.kpiTile:hover {
+    transform: perspective(1000px) rotateX(5deg) rotateY(5deg) translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+}
+
+/* Blue Tile - Total Orders */
+.kpiTileBlue {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+
+.kpiTileBlue .sapMTileContent,
+.kpiTileBlue .sapMNC,
+.kpiTileBlue .sapMGT,
+.kpiTileBlue .sapMGTHdrTxt,
+.kpiTileBlue .sapMGTSubHdrTxt {
+    color: white !important;
+}
+
+/* Green Tile - Total Revenue */
+.kpiTileGreen {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
+}
+
+.kpiTileGreen .sapMTileContent,
+.kpiTileGreen .sapMNC,
+.kpiTileGreen .sapMGT,
+.kpiTileGreen .sapMGTHdrTxt,
+.kpiTileGreen .sapMGTSubHdrTxt {
+    color: white !important;
+}
+
+/* Orange Tile - Average Order Value */
+.kpiTileOrange {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%) !important;
+}
+
+.kpiTileOrange .sapMTileContent,
+.kpiTileOrange .sapMNC,
+.kpiTileOrange .sapMGT,
+.kpiTileOrange .sapMGTHdrTxt,
+.kpiTileOrange .sapMGTSubHdrTxt {
+    color: white !important;
+}
+
+/* Purple Tile - Total Customers */
+.kpiTilePurple {
+    background: linear-gradient(135deg, #30cfd0 0%, #330867 100%) !important;
+}
+
+.kpiTilePurple .sapMTileContent,
+.kpiTilePurple .sapMNC,
+.kpiTilePurple .sapMGT,
+.kpiTilePurple .sapMGTHdrTxt,
+.kpiTilePurple .sapMGTSubHdrTxt {
+    color: white !important;
+}
+
+/* Numeric Content Styling */
+.sapMNC .sapMNCValue {
+    font-size: 2.5rem !important;
+    font-weight: bold !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Table Enhancements */
+.sapMList {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.customListItem {
+    transition: all 0.2s ease;
+    border-left: 4px solid transparent;
+}
+
+.customListItem:hover {
+    background-color: #f0f8ff !important;
+    border-left-color: #0070f2 !important;
+    transform: translateX(4px);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.kpiTile {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.kpiTile:nth-child(1) { animation-delay: 0.1s; }
+.kpiTile:nth-child(2) { animation-delay: 0.2s; }
+.kpiTile:nth-child(3) { animation-delay: 0.3s; }
+.kpiTile:nth-child(4) { animation-delay: 0.4s; }
+
+/* Filter Panel Styling */
+#filterPanel {
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+#filterPanel .sapMPanelHdr {
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    border-radius: 12px 12px 0 0;
+    font-weight: bold;
+}
+
+#filterPanel .sapMPanelContent {
+    padding: 1rem;
+}
+
+#filterPanel input,
+#filterPanel .sapMInputBaseInner {
+    border-radius: 8px;
+    border: 2px solid #e0e0e0;
+    transition: all 0.3s ease;
+}
+
+#filterPanel input:focus,
+#filterPanel .sapMInputBaseInner:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 8px rgba(102, 126, 234, 0.3);
+}
+
+#applyFilterBtn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    border: none !important;
+    color: white !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    transition: all 0.3s ease;
+}
+
+#applyFilterBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+}
+
+#clearFilterBtn {
+    border-radius: 8px !important;
+    border: 2px solid #667eea !important;
+    color: #667eea !important;
+    transition: all 0.3s ease;
+}
+
+#clearFilterBtn:hover {
+    background: #f0f4ff !important;
+    transform: translateY(-2px);
+}
+
+/* Table Container */
+#tableContainer {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+}
+
+#tableScrollContainer {
+    border-radius: 8px;
+}
+
+/* Growing List Indicator */
+.sapMGrowingList {
+    border-radius: 8px;
+}
+
+/* Label Styling */
+.sapMLabel {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.25rem;
+}
+
+/* Date Picker Styling */
+.sapMDatePicker {
+    border-radius: 8px;
+}
+
+/* Select Styling */
+.sapMSelect {
+    border-radius: 8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #filterRow1,
+    #filterRow2 {
+        flex-direction: column;
+    }
+
+    #filterRow1 > div,
+    #filterRow2 > div {
+        width: 100% !important;
+        margin-bottom: 0.5rem;
+    }
+}
