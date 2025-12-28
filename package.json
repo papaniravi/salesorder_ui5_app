@@ -1,17 +1,28 @@
 {
   "name": "salesorder-ui5-app",
   "version": "1.0.0",
-  "description": "Sales Order UI5 Application",
+  "description": "Sales Order UI5 Application with Oil & Gas Theme",
+  "keywords": [
+    "ui5",
+    "openui5",
+    "sapui5"
+  ],
+  "main": "webapp/index.html",
   "scripts": {
     "start": "ui5 serve -o index.html",
-    "build": "ui5 build --all",
-    "deploy": "fiori deploy"
+    "build": "ui5 build --config=ui5.yaml --clean-dest --dest dist",
+    "deploy": "npm run build && fiori deploy --config ui5-deploy.yaml",
+    "deploy-config": "fiori add deploy-config",
+    "undeploy": "npm run build && fiori undeploy --config ui5-deploy.yaml",
+    "deploy-test": "npm run build && fiori deploy --config ui5-deploy.yaml --testMode true"
   },
   "devDependencies": {
-    "@sap/ux-ui5-tooling": "^1",
-    "@ui5/cli": "^3",
-    "ui5-task-zipper": "^3"
+    "@sap/ux-ui5-tooling": "^1.19.3",
+    "@ui5/cli": "^4.0.0",
+    "ui5-task-zipper": "^3.1.3"
   },
+  "sapuxLayer": "CUSTOMER_BASE",
+  "sapux": true,
   "ui5": {
     "dependencies": [
       "@sap/ux-ui5-tooling",

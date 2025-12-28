@@ -10,6 +10,13 @@ framework:
     - name: sap.ui.core
     - name: sap.ui.layout
     - name: themelib_sap_horizon
+
+builder:
+  resources:
+    excludes:
+      - /test/**
+      - /localService/**
+
 server:
   customMiddleware:
     - name: fiori-tools-proxy
