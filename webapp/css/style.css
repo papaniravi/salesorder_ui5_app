@@ -2825,22 +2825,9 @@
     overflow: visible !important;
 }
 
-/* Truck overlay - on list page above sales order table */
+/* Truck overlay removed from list page - only showing on detail page Items tab */
 .tableSection {
     position: relative;
-}
-
-.tableSection::before {
-    content: '🚛';
-    position: absolute;
-    top: 5px;
-    left: 0;
-    font-size: 3rem;
-    opacity: 0;
-    pointer-events: none;
-    z-index: 999999 !important;
-    animation: truckDrive 15s linear infinite;
-    animation-delay: 1s;
 }
 
 /* Truck overlay - on detail page above Order Line Items table */
