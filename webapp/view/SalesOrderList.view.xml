@@ -20,95 +20,99 @@
                 type="Emphasized"/>
         </headerContent>
         <content>
-            <!-- KPI Section -->
-            <VBox id="kpiSection" class="sapUiSmallMargin">
-                <FlexBox id="kpiContainer" wrap="Wrap" justifyContent="SpaceAround" class="kpiFlexContainer">
-                    <!-- Total Orders KPI -->
-                    <GenericTile
-                        id="totalOrdersTile"
-                        class="sapUiTinyMargin kpiTile kpiTileBlue"
-                        header="Total Orders"
-                        subheader="Active Sales Orders"
-                        press=".onKPIPress">
-                        <tileContent>
-                            <TileContent id="totalOrdersContent">
-                                <content>
-                                    <NumericContent
-                                        id="totalOrdersNumeric"
-                                        value="{viewModel>/totalOrders}"
-                                        icon="sap-icon://sales-order"
-                                        withMargin="false"/>
-                                </content>
-                            </TileContent>
-                        </tileContent>
-                    </GenericTile>
+            <!-- Main VBox wrapper to stack sections vertically -->
+            <VBox id="mainWrapper" width="100%">
+                <!-- Top Section: KPI Grid (Left) and Filters (Right) -->
+                <HBox id="topSection" class="sapUiSmallMargin" width="100%">
+                <!-- Left: KPI Section in 2x2 Grid -->
+                <VBox id="kpiSection" class="kpiSectionContainer">
+                    <layout:Grid id="kpiGrid" defaultSpan="XL6 L6 M6 S12" hSpacing="0.5" vSpacing="0.5" class="kpiGridContainer">
+                        <!-- Total Orders KPI -->
+                        <GenericTile
+                            id="totalOrdersTile"
+                            class="kpiTile kpiTileBlue"
+                            header="Total Orders"
+                            subheader="Active Sales Orders"
+                            press=".onKPIPress">
+                            <tileContent>
+                                <TileContent id="totalOrdersContent">
+                                    <content>
+                                        <NumericContent
+                                            id="totalOrdersNumeric"
+                                            value="{viewModel>/totalOrders}"
+                                            icon="sap-icon://sales-order"
+                                            withMargin="false"/>
+                                    </content>
+                                </TileContent>
+                            </tileContent>
+                        </GenericTile>
 
-                    <!-- Total Revenue KPI -->
-                    <GenericTile
-                        id="totalRevenueTile"
-                        class="sapUiTinyMargin kpiTile kpiTileGreen"
-                        header="Total Revenue"
-                        subheader="Overall Sales Value"
-                        press=".onKPIPress">
-                        <tileContent>
-                            <TileContent id="totalRevenueContent">
-                                <content>
-                                    <NumericContent
-                                        id="totalRevenueNumeric"
-                                        value="{viewModel>/totalRevenue}"
-                                        scale="M"
-                                        icon="sap-icon://money-bills"
-                                        withMargin="false"/>
-                                </content>
-                            </TileContent>
-                        </tileContent>
-                    </GenericTile>
+                        <!-- Total Revenue KPI -->
+                        <GenericTile
+                            id="totalRevenueTile"
+                            class="kpiTile kpiTileGreen"
+                            header="Total Revenue"
+                            subheader="Overall Sales Value"
+                            press=".onKPIPress">
+                            <tileContent>
+                                <TileContent id="totalRevenueContent">
+                                    <content>
+                                        <NumericContent
+                                            id="totalRevenueNumeric"
+                                            value="{viewModel>/totalRevenue}"
+                                            scale="M"
+                                            icon="sap-icon://money-bills"
+                                            withMargin="false"/>
+                                    </content>
+                                </TileContent>
+                            </tileContent>
+                        </GenericTile>
 
-                    <!-- Average Order Value KPI -->
-                    <GenericTile
-                        id="avgOrderValueTile"
-                        class="sapUiTinyMargin kpiTile kpiTileOrange"
-                        header="Avg Order Value"
-                        subheader="Per Order"
-                        press=".onKPIPress">
-                        <tileContent>
-                            <TileContent id="avgOrderValueContent">
-                                <content>
-                                    <NumericContent
-                                        id="avgOrderValueNumeric"
-                                        value="{viewModel>/avgOrderValue}"
-                                        icon="sap-icon://bar-chart"
-                                        withMargin="false"/>
-                                </content>
-                            </TileContent>
-                        </tileContent>
-                    </GenericTile>
+                        <!-- Average Order Value KPI -->
+                        <GenericTile
+                            id="avgOrderValueTile"
+                            class="kpiTile kpiTileOrange"
+                            header="Avg Order Value"
+                            subheader="Per Order"
+                            press=".onKPIPress">
+                            <tileContent>
+                                <TileContent id="avgOrderValueContent">
+                                    <content>
+                                        <NumericContent
+                                            id="avgOrderValueNumeric"
+                                            value="{viewModel>/avgOrderValue}"
+                                            icon="sap-icon://bar-chart"
+                                            withMargin="false"/>
+                                    </content>
+                                </TileContent>
+                            </tileContent>
+                        </GenericTile>
 
-                    <!-- Active Customers KPI -->
-                    <GenericTile
-                        id="totalCustomersTile"
-                        class="sapUiTinyMargin kpiTile kpiTilePurple"
-                        header="Customers"
-                        subheader="Unique Customers"
-                        press=".onKPIPress">
-                        <tileContent>
-                            <TileContent id="totalCustomersContent">
-                                <content>
-                                    <NumericContent
-                                        id="totalCustomersNumeric"
-                                        value="{viewModel>/totalCustomers}"
-                                        icon="sap-icon://customer"
-                                        withMargin="false"/>
-                                </content>
-                            </TileContent>
-                        </tileContent>
-                    </GenericTile>
-                </FlexBox>
-            </VBox>
+                        <!-- Active Customers KPI -->
+                        <GenericTile
+                            id="totalCustomersTile"
+                            class="kpiTile kpiTilePurple"
+                            header="Customers"
+                            subheader="Unique Customers"
+                            press=".onKPIPress">
+                            <tileContent>
+                                <TileContent id="totalCustomersContent">
+                                    <content>
+                                        <NumericContent
+                                            id="totalCustomersNumeric"
+                                            value="{viewModel>/totalCustomers}"
+                                            icon="sap-icon://customer"
+                                            withMargin="false"/>
+                                    </content>
+                                </TileContent>
+                            </tileContent>
+                        </GenericTile>
+                    </layout:Grid>
+                </VBox>
 
-            <!-- Filter Panel -->
-            <VBox class="sapUiSmallMargin">
-            <Panel id="filterPanel" headerText="Filters" expandable="true" expanded="false" width="100%">
+                <!-- Right: Filter Panel -->
+                <VBox id="filterPanelContainer" class="filterPanelContainer">
+                    <Panel id="filterPanel" headerText="Filters" expandable="true" expanded="true" width="100%">
                 <content>
                     <VBox id="filterBox" class="sapUiSmallMargin">
                         <HBox id="filterRow1" class="sapUiTinyMarginBottom">
@@ -158,18 +162,18 @@
                     </VBox>
                 </content>
             </Panel>
-            </VBox>
+                </VBox>
+            </HBox>
 
-            <!-- Scrollable Table Container -->
-            <VBox class="sapUiSmallMargin">
-            <VBox id="tableContainer" class="sapUiSmallMargin">
-                <ScrollContainer id="tableScrollContainer" height="500px" vertical="true" horizontal="false">
+            <!-- Table Section - Full Width Below -->
+            <VBox id="tableContainer" class="sapUiSmallMargin tableSection">
                     <Table
                         id="salesOrderTable"
                         inset="false"
                         growing="true"
                         growingScrollToLoad="true"
                         growingThreshold="20"
+                        width="100%"
                         items="{
                             path: '/A_SalesOrder',
                             parameters: {
@@ -190,74 +194,135 @@
                             </OverflowToolbar>
                         </headerToolbar>
                 <columns>
-                    <Column id="orderIdColumn" width="12em">
-                        <Text text="{i18n>salesOrderColumn}"/>
+                    <Column id="orderIdColumn" width="10%" hAlign="Center">
+                        <Text text="Order #" class="tableColumnHeader"/>
                     </Column>
-                    <Column id="customerColumn" minScreenWidth="Tablet" demandPopin="true">
-                        <Text text="{i18n>customerColumn}"/>
+                    <Column id="customerColumn" width="22%">
+                        <Text text="Customer" class="tableColumnHeader"/>
                     </Column>
-                    <Column id="orderDateColumn" minScreenWidth="Tablet" demandPopin="true" hAlign="End">
-                        <Text text="{i18n>orderDateColumn}"/>
+                    <Column id="orderDateColumn" hAlign="Center" width="10%">
+                        <Text text="Order Date" class="tableColumnHeader"/>
                     </Column>
-                    <Column id="amountColumn" minScreenWidth="Desktop" demandPopin="true" hAlign="End">
-                        <Text text="{i18n>amountColumn}"/>
+                    <Column id="createdByColumn" width="12%">
+                        <Text text="Created By" class="tableColumnHeader"/>
                     </Column>
-                    <Column id="orderTypeColumn" minScreenWidth="Desktop" demandPopin="true">
-                        <Text text="{i18n>orderTypeColumn}"/>
+                    <Column id="salesOrgColumn" hAlign="Center" width="10%">
+                        <Text text="Sales Org" class="tableColumnHeader"/>
                     </Column>
-                    <Column id="statusColumn" minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
-                        <Text text="Status"/>
+                    <Column id="amountColumn" hAlign="End" width="12%">
+                        <Text text="Total Amount" class="tableColumnHeader"/>
+                    </Column>
+                    <Column id="orderTypeColumn" hAlign="Center" width="10%">
+                        <Text text="Type" class="tableColumnHeader"/>
+                    </Column>
+                    <Column id="poColumn" width="10%">
+                        <Text text="PO Number" class="tableColumnHeader"/>
+                    </Column>
+                    <Column id="statusColumn" hAlign="Center" width="4%">
+                        <Text text="" class="tableColumnHeader"/>
                     </Column>
                 </columns>
                 <items>
                     <ColumnListItem
                         type="Navigation"
                         press=".onItemPress"
-                        class="customListItem">
+                        class="modernListItem">
                         <cells>
-                            <ObjectIdentifier
-                                title="{SalesOrder}"
-                                text="Order"
-                                class="orderIdentifier"/>
-                            <HBox alignItems="Center">
-                                <core:Icon src="sap-icon://customer" class="sapUiTinyMarginEnd" color="#0070f2"/>
-                                <Text text="{SoldToParty}"/>
-                            </HBox>
-                            <HBox alignItems="Center" justifyContent="End">
-                                <core:Icon src="sap-icon://calendar" class="sapUiTinyMarginEnd" color="#28a745"/>
+                            <!-- Order Number with Badge -->
+                            <VBox alignItems="Center" justifyContent="Center">
+                                <HBox alignItems="Center" class="orderBadge">
+                                    <core:Icon src="sap-icon://document-text" color="#667eea" size="0.9rem" class="sapUiTinyMarginEnd"/>
+                                    <Text text="{SalesOrder}" class="orderNumberText"/>
+                                </HBox>
+                            </VBox>
+
+                            <!-- Customer with Icon and Name -->
+                            <VBox>
+                                <HBox alignItems="Center" class="sapUiTinyMarginBottom">
+                                    <core:Icon src="sap-icon://customer" color="#0070f2" size="0.9rem" class="sapUiTinyMarginEnd"/>
+                                    <Text text="{SoldToParty}" class="customerIdText"/>
+                                </HBox>
+                                <Text text="{SoldToParty}" class="customerNamePlaceholder"/>
+                            </VBox>
+
+                            <!-- Order Date with Calendar Icon -->
+                            <VBox alignItems="Center" justifyContent="Center">
+                                <core:Icon src="sap-icon://appointment-2" color="#28a745" size="1rem" class="sapUiTinyMarginBottom"/>
                                 <Text text="{
                                     path: 'SalesOrderDate',
                                     type: 'sap.ui.model.type.Date',
                                     formatOptions: {
                                         pattern: 'dd/MM/yyyy'
                                     }
-                                }"/>
-                            </HBox>
-                            <ObjectNumber
-                                number="{
-                                    path: 'TotalNetAmount',
-                                    type: 'sap.ui.model.type.Float',
+                                }" class="dateText"/>
+                            </VBox>
+
+                            <!-- Created By with User Icon -->
+                            <VBox>
+                                <HBox alignItems="Center" class="sapUiTinyMarginBottom">
+                                    <core:Icon src="sap-icon://employee" color="#9b59b6" size="0.8rem" class="sapUiTinyMarginEnd"/>
+                                    <Text text="{CreatedByUser}" class="createdByText"/>
+                                </HBox>
+                                <Text text="{
+                                    path: 'CreationDate',
+                                    type: 'sap.ui.model.type.Date',
                                     formatOptions: {
-                                        maxFractionDigits: 2,
-                                        minFractionDigits: 2
+                                        pattern: 'dd/MM/yyyy'
                                     }
-                                }"
-                                unit="{TransactionCurrency}"
-                                state="{= ${TotalNetAmount} > 1000 ? 'Success' : 'None' }"
-                                class="amountNumber"/>
-                            <HBox alignItems="Center">
-                                <core:Icon src="sap-icon://BusinessSuiteInAppSymbols/icon-order-status" class="sapUiTinyMarginEnd" color="#ff9800"/>
-                                <Text text="{SalesOrderType}"/>
-                            </HBox>
-                            <ObjectStatus
-                                text="Active"
-                                state="Success"
-                                icon="sap-icon://status-positive"/>
+                                }" class="creationDateSubtext"/>
+                            </VBox>
+
+                            <!-- Sales Organization with Badge -->
+                            <VBox alignItems="Center">
+                                <HBox class="salesOrgBadge" alignItems="Center">
+                                    <core:Icon src="sap-icon://org-chart" color="#ff9800" size="0.8rem" class="sapUiTinyMarginEnd"/>
+                                    <Text text="{SalesOrganization}" class="salesOrgText"/>
+                                </HBox>
+                            </VBox>
+
+                            <!-- Amount with Progress Indicator -->
+                            <VBox alignItems="End">
+                                <ObjectNumber
+                                    number="{
+                                        path: 'TotalNetAmount',
+                                        type: 'sap.ui.model.type.Float',
+                                        formatOptions: {
+                                            maxFractionDigits: 2,
+                                            minFractionDigits: 2
+                                        }
+                                    }"
+                                    unit="{TransactionCurrency}"
+                                    state="{= ${TotalNetAmount} > 10000 ? 'Success' : ${TotalNetAmount} > 5000 ? 'Warning' : 'Error' }"
+                                    class="amountNumberLarge"/>
+                                <HBox class="amountBar">
+                                    <HBox class="{= ${TotalNetAmount} > 10000 ? 'amountBarFillHigh' : ${TotalNetAmount} > 5000 ? 'amountBarFillMedium' : 'amountBarFillLow' }"/>
+                                </HBox>
+                            </VBox>
+
+                            <!-- Order Type Badge -->
+                            <VBox alignItems="Center">
+                                <HBox class="orderTypeBadge" alignItems="Center">
+                                    <core:Icon src="sap-icon://tag" color="#e91e63" size="0.7rem" class="sapUiTinyMarginEnd"/>
+                                    <Text text="{SalesOrderType}" class="orderTypeText"/>
+                                </HBox>
+                            </VBox>
+
+                            <!-- PO Number -->
+                            <VBox>
+                                <HBox alignItems="Center">
+                                    <core:Icon src="sap-icon://cart" color="#3498db" size="0.75rem" class="sapUiTinyMarginEnd"/>
+                                    <Text text="{= ${PurchaseOrderByCustomer} || 'N/A' }" class="poNumberText"/>
+                                </HBox>
+                            </VBox>
+
+                            <!-- Status Icon -->
+                            <VBox alignItems="Center" justifyContent="Center">
+                                <core:Icon src="sap-icon://status-positive" color="#28a745" size="1.2rem" class="statusIcon"/>
+                            </VBox>
                         </cells>
                     </ColumnListItem>
                 </items>
                     </Table>
-                </ScrollContainer>
             </VBox>
             </VBox>
         </content>

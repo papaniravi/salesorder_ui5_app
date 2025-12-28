@@ -5,7 +5,7 @@
 }
 
 .sapMPage {
-    background-color: #f5f5f5;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
 }
 
 .sapMPageEnableScrolling {
@@ -20,18 +20,39 @@
     padding: 0 1rem;
 }
 
-/* 3D KPI Tiles with Gradient Colors */
-.kpiFlexContainer {
-    padding: 1rem;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    border-radius: 12px;
-    margin: 0 0 1rem 0;
+/* Top Section Layout */
+#topSection {
+    display: flex !important;
+    gap: 1rem;
+    align-items: flex-start;
     width: 100%;
 }
 
+/* KPI Section Container - Left Side */
+.kpiSectionContainer {
+    flex: 0 0 auto;
+    min-width: 540px;
+    max-width: 540px;
+}
+
+.kpiGridContainer {
+    padding: 1rem;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border-radius: 12px;
+    width: 100%;
+}
+
+/* Filter Panel Container - Right Side */
+.filterPanelContainer {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+/* 3D KPI Tiles with Gradient Colors */
 .kpiTile {
-    min-width: 250px;
-    max-width: 280px;
+    width: 100% !important;
+    min-width: 240px !important;
+    max-width: 100% !important;
     border-radius: 16px !important;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -46,7 +67,7 @@
 
 /* Blue Tile - Total Orders */
 .kpiTileBlue {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    background: linear-gradient(135deg, #1e3a5f 0%, #2c5f8d 100%) !important;
 }
 
 .kpiTileBlue .sapMTileContent,
@@ -59,7 +80,7 @@
 
 /* Green Tile - Total Revenue */
 .kpiTileGreen {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
+    background: linear-gradient(135deg, #16a085 0%, #1abc9c 100%) !important;
 }
 
 .kpiTileGreen .sapMTileContent,
@@ -72,7 +93,7 @@
 
 /* Orange Tile - Average Order Value */
 .kpiTileOrange {
-    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%) !important;
+    background: linear-gradient(135deg, #2980b9 0%, #3498db 100%) !important;
 }
 
 .kpiTileOrange .sapMTileContent,
@@ -151,7 +172,7 @@
 }
 
 #filterPanel .sapMPanelHdr {
-    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%) !important;
+    background: linear-gradient(90deg, #1e3a5f 0%, #2c5f8d 100%) !important;
     color: white !important;
     border-radius: 12px 12px 0 0;
     font-weight: bold;
@@ -170,34 +191,40 @@
 
 #filterPanel input:focus,
 #filterPanel .sapMInputBaseInner:focus {
-    border-color: #667eea;
-    box-shadow: 0 0 8px rgba(102, 126, 234, 0.3);
+    border-color: #2c5f8d;
+    box-shadow: 0 0 8px rgba(44, 95, 141, 0.3);
 }
 
 #applyFilterBtn {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    background: linear-gradient(135deg, #1e3a5f 0%, #2c5f8d 100%) !important;
     border: none !important;
     color: white !important;
     border-radius: 8px !important;
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 4px 12px rgba(44, 95, 141, 0.3);
     transition: all 0.3s ease;
 }
 
 #applyFilterBtn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 6px 16px rgba(44, 95, 141, 0.4);
 }
 
 #clearFilterBtn {
     border-radius: 8px !important;
-    border: 2px solid #667eea !important;
-    color: #667eea !important;
+    border: 2px solid #2c5f8d !important;
+    color: #2c5f8d !important;
     transition: all 0.3s ease;
 }
 
 #clearFilterBtn:hover {
     background: #f0f4ff !important;
     transform: translateY(-2px);
+}
+
+/* Table Section - Full Width */
+.tableSection {
+    width: 100% !important;
+    max-width: 100% !important;
 }
 
 /* Table Container */
@@ -236,6 +263,21 @@
 }
 
 /* Responsive adjustments */
+@media (max-width: 1200px) {
+    #topSection {
+        flex-direction: column !important;
+    }
+
+    .kpiSectionContainer {
+        min-width: 100%;
+        max-width: 100%;
+    }
+
+    .filterPanelContainer {
+        width: 100%;
+    }
+}
+
 @media (max-width: 768px) {
     #filterRow1,
     #filterRow2 {
@@ -247,4 +289,2995 @@
         width: 100% !important;
         margin-bottom: 0.5rem;
     }
+
+    .kpiGridContainer {
+        padding: 0.5rem;
+    }
+
+    .kpiTile {
+        min-width: 100% !important;
+    }
+}
+
+/* ==================== SALES ORDER DETAIL PAGE ==================== */
+
+/* Detail Page Background */
+.detailPage .sapMPageContent {
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8edf2 100%);
+}
+
+/* Enhanced Header Card with 3D Effect - Compact */
+.detailHeaderCard {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2c5f8d 100%);
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    margin: 0.5rem;
+    box-shadow: 0 6px 15px rgba(44, 95, 141, 0.25);
+    transform: perspective(1000px) rotateX(2deg);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    overflow: visible;
+}
+
+.detailHeaderCard:hover {
+    transform: perspective(1000px) rotateX(0deg) translateY(-3px);
+    box-shadow: 0 10px 20px rgba(44, 95, 141, 0.3);
+}
+
+.headerContent {
+    color: white;
+    margin-bottom: 0.5rem;
+    width: 100%;
+    align-items: flex-start !important;
+}
+
+.amountContainer {
+    padding-top: 0.25rem;
+}
+
+.amountLabel {
+    font-size: 0.65rem !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+    margin-bottom: 0.15rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.amountValue {
+    font-size: 1.2rem !important;
+    font-weight: 700 !important;
+    color: white !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    line-height: 1.2 !important;
+}
+
+.amountCurrency {
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    margin-left: 0.3rem;
+}
+
+.orderNumber {
+    font-size: 1.5rem !important;
+    font-weight: bold !important;
+    color: white !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    word-break: break-word;
+}
+
+.orderType {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+}
+
+
+.statusBadge {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.25rem 0.6rem;
+    border-radius: 12px;
+    margin-top: 0.25rem;
+    backdrop-filter: blur(10px);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.statusText {
+    color: white !important;
+    font-weight: 600;
+    font-size: 0.75rem !important;
+}
+
+/* Quick Info Cards - Vertical Stack */
+.quickInfoCards {
+    gap: 0.3rem;
+}
+
+.infoCard {
+    width: 100%;
+    background: white;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    cursor: pointer;
+    transform: translateX(0);
+}
+
+.infoCard:hover {
+    transform: translateX(5px);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+}
+
+.cardBlue {
+    border-left: 3px solid #0070f2;
+}
+
+.cardGreen {
+    border-left: 3px solid #28a745;
+}
+
+.cardOrange {
+    border-left: 3px solid #ff9800;
+}
+
+.infoIcon {
+    font-size: 1.1rem !important;
+    margin-right: 0.5rem;
+    flex-shrink: 0;
+}
+
+.infoLabel {
+    font-size: 0.65rem !important;
+    color: #666 !important;
+    margin-bottom: 0.1rem;
+}
+
+.infoValue {
+    font-size: 0.8rem !important;
+    font-weight: 600 !important;
+    color: #2c3e50 !important;
+    line-height: 1.2 !important;
+    word-break: break-word;
+}
+
+/* Modern Tab Bar */
+.modernTabBar {
+    margin: 0.5rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+}
+
+.modernTabBar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #1e3a5f 0%, #2c5f8d 50%, #1e3a5f 100%);
+    background-size: 200% 100%;
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+.modernTabBar .sapMITBHead {
+    background: linear-gradient(90deg, #f8f9fa 0%, #ffffff 100%);
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.modernTabBar .sapMITBFilter {
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.modernTabBar .sapMITBFilter:hover {
+    background: rgba(44, 95, 141, 0.1);
+    transform: translateY(-2px);
+}
+
+.modernTabBar .sapMITBSelected {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2c5f8d 100%) !important;
+    color: white !important;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 -3px 10px rgba(44, 95, 141, 0.3);
+}
+
+.modernTabBar .sapMITBSelected .sapMITBFilterIcon,
+.modernTabBar .sapMITBSelected .sapMITBText {
+    color: white !important;
+}
+
+/* Detail Tab Content */
+.detailTabContent {
+    padding: 2rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+/* Section Container */
+.sectionContainer {
+    margin-bottom: 2rem;
+}
+
+.sectionHeader {
+    background: linear-gradient(135deg, rgba(44, 95, 141, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid #2c5f8d;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 2px 8px rgba(44, 95, 141, 0.15);
+}
+
+.sectionIcon {
+    font-size: 1.5rem !important;
+}
+
+.sectionTitle {
+    color: #2c5f8d !important;
+    font-weight: 700 !important;
+    font-size: 1.2rem !important;
+    margin: 0 !important;
+}
+
+.detailsGrid {
+    gap: 1.5rem;
+}
+
+.detailField {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border-left: 4px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.detailField::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 0;
+    background: linear-gradient(180deg, #1e3a5f 0%, #2c5f8d 100%);
+    transition: height 0.3s ease;
+}
+
+.detailField:hover {
+    transform: translateX(5px) scale(1.02);
+    box-shadow: 0 8px 24px rgba(44, 95, 141, 0.2);
+    border-left-color: transparent;
+}
+
+.detailField:hover::before {
+    height: 100%;
+}
+
+.fieldLabel {
+    font-size: 0.85rem !important;
+    color: #666 !important;
+    font-weight: 600 !important;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.fieldValue {
+    font-size: 1.1rem !important;
+    color: #2c3e50 !important;
+    font-weight: 500 !important;
+}
+
+/* Items Tab Content */
+.itemsTabContent {
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.modernTable {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    background: white;
+}
+
+.modernTable .sapMListTbl {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+/* Table Header Toolbar */
+.tableHeaderToolbar {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2c5f8d 100%) !important;
+    padding: 1rem !important;
+    border-radius: 12px 12px 0 0;
+    min-height: 3rem;
+}
+
+.tableHeaderTitle {
+    color: white !important;
+    font-size: 1.3rem !important;
+    font-weight: 700 !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.itemCountLabel {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+}
+
+.modernTable thead {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2c5f8d 100%) !important;
+}
+
+.modernTable .sapMListTblHeaderCell {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2c5f8d 100%) !important;
+    border: none !important;
+}
+
+.columnHeader {
+    font-weight: 700 !important;
+    color: white !important;
+    font-size: 0.9rem !important;
+    padding: 0.75rem !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.modernTableRow {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border-left: 4px solid transparent;
+    position: relative;
+}
+
+.modernTableRow::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(44, 95, 141, 0.2) 50%, transparent 100%);
+}
+
+.modernTableRow:hover {
+    background: linear-gradient(90deg, rgba(44, 95, 141, 0.08) 0%, rgba(255, 255, 255, 1) 100%) !important;
+    border-left-color: #2c5f8d !important;
+    transform: translateX(8px) scale(1.01);
+    box-shadow: 0 4px 12px rgba(44, 95, 141, 0.15);
+}
+
+.itemNumber {
+    font-weight: 700 !important;
+    color: #2c5f8d !important;
+    font-size: 1rem !important;
+}
+
+.materialText {
+    font-weight: 600 !important;
+    color: #0070f2 !important;
+}
+
+.itemDescription {
+    font-weight: 600 !important;
+    color: #2c3e50 !important;
+    font-size: 0.95rem !important;
+    margin-bottom: 0.25rem;
+}
+
+.itemSubtext {
+    font-size: 0.8rem !important;
+    color: #666 !important;
+    font-style: italic;
+}
+
+.quantityNumber,
+.priceNumber,
+.unitPriceNumber {
+    font-weight: 600 !important;
+    font-size: 1.05rem !important;
+}
+
+.quantityNumber {
+    color: #2c5f8d !important;
+}
+
+.quantityNumber .sapMObjectNumberText {
+    font-weight: 700 !important;
+}
+
+.unitPriceNumber {
+    color: #ff9800 !important;
+}
+
+.unitPriceNumber .sapMObjectNumberText {
+    font-weight: 700 !important;
+}
+
+.priceNumber .sapMObjectNumberText {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700 !important;
+}
+
+.deliveryDate {
+    font-size: 0.85rem !important;
+    color: #2c5f8d !important;
+    font-weight: 600 !important;
+}
+
+.unitText {
+    font-size: 0.9rem !important;
+    color: #2c5f8d !important;
+    font-weight: 600 !important;
+    text-transform: uppercase;
+}
+
+/* Item Table New Fields - Compact Styling */
+.plantCode {
+    font-weight: 700 !important;
+    color: #28a745 !important;
+    font-size: 0.75rem !important;
+}
+
+.plantName {
+    font-size: 0.7rem !important;
+    color: #666 !important;
+    margin-top: 0.1rem;
+}
+
+.dealNumber {
+    font-weight: 700 !important;
+    color: #e91e63 !important;
+    font-size: 0.75rem !important;
+}
+
+.shippingPoint {
+    font-weight: 700 !important;
+    color: #2c5f8d !important;
+    font-size: 0.75rem !important;
+}
+
+.logisticsText {
+    font-size: 0.7rem !important;
+    color: #ff9800 !important;
+    font-weight: 600 !important;
+}
+
+.logisticsSubtext {
+    font-size: 0.65rem !important;
+    color: #666 !important;
+    margin-top: 0.1rem;
+}
+
+/* Compact Item Table Cells */
+.itemsTabContent .modernTable .sapMListTblRow {
+    height: auto !important;
+    min-height: 3rem !important;
+}
+
+.itemsTabContent .modernTable .sapMListTblCell {
+    padding: 0.25rem 0.5rem !important;
+}
+
+.materialText {
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+}
+
+.itemDescription {
+    font-size: 0.7rem !important;
+    margin-top: 0.1rem !important;
+}
+
+.itemSubtext {
+    font-size: 0.65rem !important;
+    margin-top: 0.1rem !important;
+}
+
+.itemNumber {
+    font-size: 0.75rem !important;
+    font-weight: 700 !important;
+}
+
+.quantityNumber {
+    font-size: 0.75rem !important;
+}
+
+.unitPriceNumber {
+    font-size: 0.75rem !important;
+}
+
+.priceNumber {
+    font-size: 0.75rem !important;
+}
+
+/* Schedule Line Table */
+.scheduleLineTable {
+    margin-top: 1rem;
+}
+
+.scheduleLineTable .tableRow {
+    background: white;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+}
+
+.scheduleLineTable .tableRow:hover {
+    background: linear-gradient(90deg, rgba(44, 95, 141, 0.05) 0%, rgba(255, 255, 255, 1) 100%) !important;
+    border-left-color: #2c5f8d !important;
+    transform: translateX(5px);
+    box-shadow: 0 2px 8px rgba(44, 95, 141, 0.1);
+}
+
+/* Animations */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.detailHeaderCard {
+    animation: slideInUp 0.6s ease-out;
+}
+
+.infoCard:nth-child(1) {
+    animation: slideInUp 0.7s ease-out;
+}
+
+.infoCard:nth-child(2) {
+    animation: slideInUp 0.8s ease-out;
+}
+
+.infoCard:nth-child(3) {
+    animation: slideInUp 0.9s ease-out;
+}
+
+.modernTabBar {
+    animation: slideInUp 1s ease-out;
+}
+
+/* Pulsing animation for status badge */
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 0 10px rgba(40, 167, 69, 0);
+    }
+}
+
+.statusBadge core:Icon {
+    animation: pulse 2s infinite;
+}
+
+/* Document Flow Cells */
+.documentFlowCell {
+    padding: 0.5rem;
+    background: linear-gradient(135deg, rgba(44, 95, 141, 0.05) 0%, rgba(255, 255, 255, 0.8) 100%);
+    border-radius: 8px;
+    border-left: 3px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.documentFlowCell:hover {
+    background: linear-gradient(135deg, rgba(44, 95, 141, 0.1) 0%, rgba(255, 255, 255, 1) 100%);
+    border-left-color: #2c5f8d;
+    transform: translateX(3px);
+    box-shadow: 0 2px 8px rgba(44, 95, 141, 0.2);
+}
+
+.docNumber {
+    font-weight: 700 !important;
+    color: #2c3e50 !important;
+    font-size: 0.9rem !important;
+}
+
+.docCategory {
+    font-size: 0.75rem !important;
+    color: #2c5f8d !important;
+    font-style: italic;
+    margin-top: 0.15rem;
+}
+
+/* Enhanced List Item */
+.customListItem {
+    background: white;
+    border-radius: 12px;
+    margin-bottom: 0.75rem;
+    padding: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border-left: 4px solid transparent;
+}
+
+.customListItem:hover {
+    box-shadow: 0 8px 20px rgba(44, 95, 141, 0.2);
+    transform: translateY(-3px) translateX(5px);
+    border-left-color: #2c5f8d;
+}
+
+.orderIdentifier {
+    font-weight: 700 !important;
+    color: #2c5f8d !important;
+}
+
+.amountNumber {
+    font-weight: 700 !important;
+}
+
+/* Table Section Enhancements */
+.tableSection {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    margin-top: 1.5rem;
+}
+
+/* Responsive Design for Detail Page */
+@media (max-width: 1200px) {
+    .detailHeaderCard {
+        padding: 1.5rem;
+    }
+
+    .orderNumber {
+        font-size: 2rem !important;
+    }
+
+    .totalAmount {
+        font-size: 1.5rem !important;
+    }
+
+    .totalAmount .sapMObjectNumberText {
+        font-size: 1.5rem !important;
+    }
+
+    .quickInfoCards {
+        flex-direction: column;
+    }
+
+    .infoCard {
+        flex: 1 1 100%;
+        min-width: 100%;
+    }
+
+    .detailTabContent {
+        padding: 1rem;
+    }
+
+    .detailsGrid {
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .detailHeaderCard {
+        padding: 1rem;
+        margin: 0.5rem;
+    }
+
+    .headerContent {
+        margin-bottom: 1rem;
+    }
+
+    .orderNumber {
+        font-size: 1.5rem !important;
+    }
+
+    .totalAmount {
+        font-size: 1.2rem !important;
+    }
+
+    .totalAmount .sapMObjectNumberText {
+        font-size: 1.2rem !important;
+    }
+
+    .infoIcon {
+        font-size: 1.5rem !important;
+    }
+
+    .infoValue {
+        font-size: 1rem !important;
+    }
+
+    .modernTabBar {
+        margin: 0.5rem;
+    }
+
+    .itemsTabContent {
+        padding: 0.5rem;
+    }
+}
+
+/* Glassmorphism effect for info cards */
+.infoCard {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Add shine effect on hover */
+@keyframes shine {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+.detailField::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+    transition: left 0.5s;
+}
+
+.detailField:hover::after {
+    left: 100%;
+}
+
+/* Add glow to table headers */
+.modernTable thead th {
+    position: relative;
+}
+
+.modernTable thead th::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Alternating row colors for better readability */
+.modernTable .sapMListTblRow:nth-child(even) {
+    background-color: rgba(44, 95, 141, 0.02);
+}
+
+/* Table cell padding */
+.modernTable .sapMListTblCell {
+    padding: 1rem 0.75rem !important;
+}
+
+/* Status icons with pulse effect */
+.modernTableRow .sapMObjStatusIcon {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* Enhanced ObjectStatus styling */
+.modernTableRow .sapMObjStatus {
+    padding: 0.3rem 0.8rem;
+    border-radius: 12px;
+    background: rgba(40, 167, 69, 0.1);
+    font-weight: 600 !important;
+}
+
+/* Add subtle box shadow to each cell on hover */
+.modernTableRow:hover .sapMListTblCell {
+    background: transparent;
+}
+
+/* Toolbar spacing */
+.tableHeaderToolbar .sapMTB {
+    padding: 0 !important;
+}
+
+/* ============================================
+   ADVANCED MAIN TABLE STYLES - 3D & RICH DISPLAY
+   ============================================ */
+
+/* Modern List Item with 3D Effect */
+.modernListItem {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%) !important;
+    border-radius: 12px !important;
+    margin-bottom: 0.75rem !important;
+    padding: 0.75rem !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08) !important;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+    transform: perspective(1000px) rotateX(0deg) !important;
+    border-left: 4px solid transparent !important;
+}
+
+.modernListItem:hover {
+    transform: perspective(1000px) rotateX(2deg) translateY(-5px) !important;
+    box-shadow: 0 12px 30px rgba(44, 95, 141, 0.25) !important;
+    border-left-color: #2c5f8d !important;
+    background: linear-gradient(135deg, #ffffff 0%, #f0f4ff 100%) !important;
+}
+
+/* Table Column Headers */
+.tableColumnHeader {
+    font-weight: 700 !important;
+    color: #2c5f8d !important;
+    font-size: 0.8rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+}
+
+/* Order Badge */
+.orderBadge {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2c5f8d 100%);
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    box-shadow: 0 3px 10px rgba(44, 95, 141, 0.3);
+    transition: all 0.3s ease;
+}
+
+.modernListItem:hover .orderBadge {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(44, 95, 141, 0.4);
+}
+
+.orderNumberText {
+    color: white !important;
+    font-weight: 700 !important;
+    font-size: 0.85rem !important;
+}
+
+/* Customer Section */
+.customerIdText {
+    font-weight: 700 !important;
+    color: #0070f2 !important;
+    font-size: 0.75rem !important;
+}
+
+.customerNamePlaceholder {
+    font-size: 0.7rem !important;
+    color: #666 !important;
+    line-height: 1.3 !important;
+}
+
+/* Date Text */
+.dateText {
+    font-weight: 600 !important;
+    color: #28a745 !important;
+    font-size: 0.8rem !important;
+}
+
+/* Created By Section */
+.createdByText {
+    font-weight: 600 !important;
+    color: #9b59b6 !important;
+    font-size: 0.75rem !important;
+}
+
+.creationDateSubtext {
+    font-size: 0.65rem !important;
+    color: #999 !important;
+}
+
+/* Sales Org Badge */
+.salesOrgBadge {
+    background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+    padding: 0.35rem 0.7rem;
+    border-radius: 15px;
+    box-shadow: 0 2px 8px rgba(255, 152, 0, 0.25);
+    transition: all 0.3s ease;
+}
+
+.modernListItem:hover .salesOrgBadge {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(255, 152, 0, 0.35);
+}
+
+.salesOrgText {
+    font-weight: 700 !important;
+    color: #d35400 !important;
+    font-size: 0.8rem !important;
+}
+
+/* Amount Number Large */
+.amountNumberLarge {
+    font-size: 1.1rem !important;
+    font-weight: 700 !important;
+}
+
+/* Amount Progress Bar */
+.amountBar {
+    width: 100%;
+    height: 4px;
+    background: #e0e0e0;
+    border-radius: 2px;
+    margin-top: 0.3rem;
+    overflow: hidden;
+}
+
+.amountBarFillHigh {
+    height: 100%;
+    width: 80%;
+    background: linear-gradient(90deg, #28a745 0%, #20c997 100%);
+    border-radius: 2px;
+    box-shadow: 0 0 8px rgba(40, 167, 69, 0.5);
+    animation: barPulse 2s ease-in-out infinite;
+}
+
+.amountBarFillMedium {
+    height: 100%;
+    width: 50%;
+    background: linear-gradient(90deg, #ffc107 0%, #ff9800 100%);
+    border-radius: 2px;
+    box-shadow: 0 0 8px rgba(255, 193, 7, 0.5);
+    animation: barPulse 2s ease-in-out infinite;
+}
+
+.amountBarFillLow {
+    height: 100%;
+    width: 30%;
+    background: linear-gradient(90deg, #dc3545 0%, #c82333 100%);
+    border-radius: 2px;
+    box-shadow: 0 0 8px rgba(220, 53, 69, 0.5);
+    animation: barPulse 2s ease-in-out infinite;
+}
+
+@keyframes barPulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+/* Order Type Badge */
+.orderTypeBadge {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    padding: 0.35rem 0.7rem;
+    border-radius: 15px;
+    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.25);
+    transition: all 0.3s ease;
+}
+
+.modernListItem:hover .orderTypeBadge {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(44, 62, 80, 0.35);
+}
+
+.orderTypeText {
+    font-weight: 700 !important;
+    color: white !important;
+    font-size: 0.75rem !important;
+}
+
+/* PO Number Text */
+.poNumberText {
+    font-weight: 600 !important;
+    color: #3498db !important;
+    font-size: 0.75rem !important;
+}
+
+/* Status Icon */
+.statusIcon {
+    transition: all 0.3s ease;
+}
+
+.modernListItem:hover .statusIcon {
+    transform: rotate(360deg) scale(1.2);
+}
+
+/* Table Container Enhancements */
+#salesOrderTable {
+    border-radius: 12px !important;
+    overflow: hidden !important;
+}
+
+#salesOrderTable .sapMListTblHeaderCell {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2c5f8d 100%) !important;
+    color: white !important;
+    padding: 1rem 0.75rem !important;
+    border: none !important;
+}
+
+#salesOrderTable .sapMListTbl {
+    border: none !important;
+}
+
+/* Remove default table borders */
+#salesOrderTable .sapMListTblRow {
+    border: none !important;
+}
+
+#salesOrderTable .sapMListTblCell {
+    border: none !important;
+    padding: 0 !important;
+}
+
+/* Hover effect for entire row */
+.modernListItem .sapMListTblCell {
+    background: transparent !important;
+}
+
+/* Icon animations */
+.modernListItem core\\:Icon {
+    transition: all 0.3s ease;
+}
+
+.modernListItem:hover core\\:Icon {
+    transform: scale(1.1);
+}
+
+/* Gradient overlay effect */
+.modernListItem::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(44, 95, 141, 0.02) 0%, transparent 100%);
+    pointer-events: none;
+    border-radius: 12px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modernListItem:hover::after {
+    opacity: 1;
+}
+
+/* Staggered animation for list items */
+.modernListItem:nth-child(1) { animation: slideIn 0.3s ease 0.05s backwards; }
+.modernListItem:nth-child(2) { animation: slideIn 0.3s ease 0.1s backwards; }
+.modernListItem:nth-child(3) { animation: slideIn 0.3s ease 0.15s backwards; }
+.modernListItem:nth-child(4) { animation: slideIn 0.3s ease 0.2s backwards; }
+.modernListItem:nth-child(5) { animation: slideIn 0.3s ease 0.25s backwards; }
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .modernListItem {
+        margin-bottom: 0.5rem !important;
+        padding: 0.5rem !important;
+    }
+    
+    .orderBadge,
+    .salesOrgBadge,
+    .orderTypeBadge {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.7rem !important;
+    }
+}
+
+/* ============================================
+   SCROLLBAR CUSTOMIZATION - Wider & More Visible
+   ============================================ */
+
+/* Webkit browsers (Chrome, Safari, Edge) */
+.itemsTabContent ::-webkit-scrollbar {
+    width: 16px !important;
+}
+
+.itemsTabContent ::-webkit-scrollbar-track {
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
+    border-radius: 10px;
+    margin: 5px;
+}
+
+.itemsTabContent ::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2c5f8d 100%);
+    border-radius: 10px;
+    border: 3px solid #f5f7fa;
+    box-shadow: 0 2px 8px rgba(44, 95, 141, 0.3);
+}
+
+.itemsTabContent ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #2c5f8d 0%, #1e3a5f 100%);
+    box-shadow: 0 4px 12px rgba(44, 95, 141, 0.5);
+}
+
+/* Firefox */
+.itemsTabContent {
+    scrollbar-width: thick !important;
+    scrollbar-color: #2c5f8d #f5f7fa !important;
+}
+
+/* ScrollContainer specific */
+.sapMScrollCont::-webkit-scrollbar {
+    width: 16px !important;
+}
+
+.sapMScrollCont::-webkit-scrollbar-track {
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
+    border-radius: 10px;
+}
+
+.sapMScrollCont::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2c5f8d 100%);
+    border-radius: 10px;
+    border: 3px solid #f5f7fa;
+}
+
+.sapMScrollCont::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #2c5f8d 0%, #1e3a5f 100%);
+}
+
+/* ============================================
+   REDUCED FONT SIZES FOR COMPACT DISPLAY
+   ============================================ */
+
+/* Further reduce item table font sizes */
+.materialText {
+    font-size: 0.7rem !important;
+}
+
+.itemDescription {
+    font-size: 0.65rem !important;
+}
+
+.itemSubtext {
+    font-size: 0.6rem !important;
+}
+
+.itemNumber {
+    font-size: 0.7rem !important;
+}
+
+.plantCode {
+    font-size: 0.7rem !important;
+}
+
+.plantName {
+    font-size: 0.65rem !important;
+}
+
+.dealNumber {
+    font-size: 0.7rem !important;
+}
+
+.shippingPoint {
+    font-size: 0.7rem !important;
+}
+
+.logisticsText {
+    font-size: 0.65rem !important;
+}
+
+.logisticsSubtext {
+    font-size: 0.6rem !important;
+}
+
+.quantityNumber {
+    font-size: 0.7rem !important;
+}
+
+.unitPriceNumber {
+    font-size: 0.7rem !important;
+}
+
+.priceNumber {
+    font-size: 0.7rem !important;
+}
+
+/* Column Headers smaller */
+.columnHeader {
+    font-size: 0.7rem !important;
+    font-weight: 700 !important;
+}
+
+/* Table row height reduction */
+.itemsTabContent .modernTable .sapMListTblRow {
+    min-height: 2.5rem !important;
+}
+
+.itemsTabContent .modernTable .sapMListTblCell {
+    padding: 0.2rem 0.4rem !important;
+}
+
+/* Schedule Line Table matching styles */
+.scheduleLineTable .columnHeader {
+    font-size: 0.7rem !important;
+}
+
+.scheduleLineTable .sapMText {
+    font-size: 0.7rem !important;
+}
+
+.scheduleLineTable .sapMObjectNumber {
+    font-size: 0.7rem !important;
+}
+
+.scheduleLineTable .deliveryDate {
+    font-size: 0.7rem !important;
+}
+
+
+/* ============================================
+   ULTRA PREMIUM BUSINESS STYLING - ADVANCED 3D
+   ============================================ */
+
+/* Glass Morphism Effect for Cards */
+.modernListItem::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.6) 100%);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    z-index: -1;
+}
+
+/* Animated Gradient Background for List Items */
+.modernListItem {
+    position: relative;
+    overflow: hidden;
+}
+
+.modernListItem::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(44, 95, 141, 0.1) 50%,
+        transparent 70%
+    );
+    animation: shimmerEffect 3s infinite;
+    pointer-events: none;
+}
+
+@keyframes shimmerEffect {
+    0% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+    100% {
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
+}
+
+/* Premium Badge Glow Effects */
+.orderBadge,
+.salesOrgBadge,
+.orderTypeBadge {
+    position: relative;
+    overflow: visible;
+}
+
+.orderBadge::before,
+.salesOrgBadge::before,
+.orderTypeBadge::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #1e3a5f, #2c5f8d, #1e3a5f);
+    border-radius: 22px;
+    z-index: -1;
+    opacity: 0;
+    filter: blur(10px);
+    transition: opacity 0.3s ease;
+    animation: rotateBorder 3s linear infinite;
+}
+
+.modernListItem:hover .orderBadge::before,
+.modernListItem:hover .salesOrgBadge::before,
+.modernListItem:hover .orderTypeBadge::before {
+    opacity: 0.8;
+}
+
+@keyframes rotateBorder {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Floating Animation for Status Icons */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+.statusIcon {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Neon Glow Effect for Important Elements */
+.amountNumberLarge .sapMObjectNumberText {
+    text-shadow: 
+        0 0 5px rgba(40, 167, 69, 0.5),
+        0 0 10px rgba(40, 167, 69, 0.3),
+        0 0 15px rgba(40, 167, 69, 0.2);
+}
+
+/* Card Stack Effect */
+.modernListItem {
+    box-shadow: 
+        0 4px 15px rgba(0, 0, 0, 0.08),
+        0 1px 3px rgba(0, 0, 0, 0.12),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+}
+
+.modernListItem:hover {
+    box-shadow: 
+        0 12px 30px rgba(44, 95, 141, 0.25),
+        0 4px 8px rgba(0, 0, 0, 0.15),
+        inset 0 0 0 1px rgba(255, 255, 255, 1),
+        0 0 20px rgba(44, 95, 141, 0.3);
+}
+
+/* Metallic Gradient for Headers */
+#salesOrderTable .sapMListTblHeaderCell {
+    background: linear-gradient(135deg,
+        #1e3a5f 0%,
+        #2c5f8d 25%,
+        #1e3a5f 50%,
+        #2c5f8d 75%,
+        #1e3a5f 100%) !important;
+    background-size: 200% 200% !important;
+    animation: gradientShift 4s ease infinite !important;
+    box-shadow: 0 4px 15px rgba(30, 58, 95, 0.4) !important;
+}
+
+@keyframes gradientShift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* 3D Perspective Transform for Table */
+#salesOrderTable {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+/* Ripple Effect on Click */
+.modernListItem {
+    position: relative;
+}
+
+.modernListItem::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(44, 95, 141, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.modernListItem:active::before {
+    width: 100%;
+    height: 100%;
+}
+
+/* Particle Effect Background */
+@keyframes particleFloat {
+    0%, 100% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh) translateX(50px);
+        opacity: 0;
+    }
+}
+
+/* Enhanced Amount Bar with Pulse */
+.amountBar {
+    position: relative;
+    overflow: visible;
+}
+
+.amountBarFillHigh::after,
+.amountBarFillMedium::after,
+.amountBarFillLow::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: inherit;
+    filter: blur(4px);
+    opacity: 0.5;
+    animation: pulseGlow 2s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        transform: scaleY(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scaleY(1.5);
+        opacity: 0.8;
+    }
+}
+
+/* Premium Icon Hover Effects */
+.modernListItem core\\:Icon {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.modernListItem:hover core\\:Icon {
+    filter: drop-shadow(0 4px 8px rgba(44, 95, 141, 0.4));
+    transform: scale(1.15) rotate(5deg);
+}
+
+/* Crystal Effect on Badges */
+.orderBadge,
+.salesOrgBadge,
+.orderTypeBadge {
+    background-attachment: fixed;
+    box-shadow: 
+        0 3px 10px rgba(44, 95, 141, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Light Ray Effect */
+.modernListItem {
+    position: relative;
+}
+
+.modernListItem::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+    );
+    transition: left 0.5s;
+    pointer-events: none;
+}
+
+.modernListItem:hover::after {
+    left: 100%;
+}
+
+/* Depth Shadow for Text */
+.orderNumberText,
+.salesOrgText,
+.orderTypeText {
+    text-shadow: 
+        0 1px 2px rgba(0, 0, 0, 0.2),
+        0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Premium Scrollbar Enhancement */
+.sapMScrollCont::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2c5f8d 100%);
+    border-radius: 10px;
+    border: 3px solid #f5f7fa;
+    box-shadow: 
+        0 2px 8px rgba(44, 95, 141, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    position: relative;
+}
+
+.sapMScrollCont::-webkit-scrollbar-thumb::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 2px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 1px;
+}
+
+/* Enhanced KPI Tiles with 3D Depth */
+.kpiTile {
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.15),
+        0 1px 3px rgba(0, 0, 0, 0.12),
+        inset 0 0 50px rgba(255, 255, 255, 0.1);
+    transform-style: preserve-3d;
+}
+
+.kpiTile::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.2) 0%,
+        transparent 50%,
+        rgba(0, 0, 0, 0.1) 100%
+    );
+    border-radius: 16px;
+    pointer-events: none;
+}
+
+/* Holographic Effect for Customer Names */
+.customerIdText {
+    background: linear-gradient(45deg, #0070f2, #00c6ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+}
+
+/* Animated Border Gradient */
+.modernListItem {
+    border-radius: 12px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+    position: relative;
+}
+
+.modernListItem::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #1e3a5f, #2c5f8d, #1e3a5f);
+    border-radius: 12px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    filter: blur(5px);
+}
+
+.modernListItem:hover::before {
+    opacity: 1;
+}
+
+/* Metallic Shine Effect */
+@keyframes metallicShine {
+    0% {
+        background-position: -200% center;
+    }
+    100% {
+        background-position: 200% center;
+    }
+}
+
+.tableColumnHeader {
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.3) 50%,
+        transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: metallicShine 3s linear infinite;
+}
+
+/* Enhanced Date Display with Calendar Icon Pulse */
+@keyframes iconPulse {
+    0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 0 rgba(40, 167, 69, 0));
+    }
+    50% {
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 8px rgba(40, 167, 69, 0.6));
+    }
+}
+
+.modernListItem:hover .sapUiIcon[src*="appointment"] {
+    animation: iconPulse 2s ease-in-out infinite;
+}
+
+/* Premium Focus States */
+.modernListItem:focus-within {
+    outline: none;
+    box-shadow: 
+        0 0 0 3px rgba(44, 95, 141, 0.3),
+        0 12px 30px rgba(44, 95, 141, 0.25);
+}
+
+/* Luxury Typography Enhancement */
+.amountNumberLarge .sapMObjectNumberText {
+    font-family: 'Segoe UI', -apple-system, system-ui, sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Sophisticated Hover State for Entire Row */
+.modernListItem:hover {
+    background: 
+        linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%),
+        radial-gradient(circle at top right, rgba(44, 95, 141, 0.1), transparent);
+}
+
+/* Premium Loading State */
+@keyframes skeletonPulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.4;
+    }
+}
+
+.modernListItem.loading {
+    animation: skeletonPulse 1.5s ease-in-out infinite;
+}
+
+/* Elite Filter Section Enhancement */
+.filterPanel {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+
+/* ============================================
+   DETAIL PAGE ULTRA PREMIUM ENHANCEMENTS
+   ============================================ */
+
+/* Animated Background for Detail Header */
+.detailHeaderCard {
+    background: 
+        linear-gradient(135deg, #1e3a5f 0%, #2c5f8d 100%),
+        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+    background-blend-mode: overlay;
+}
+
+/* Glowing Border Animation for Header */
+@keyframes borderGlow {
+    0%, 100% {
+        box-shadow: 
+            0 6px 15px rgba(44, 95, 141, 0.25),
+            0 0 0 0 rgba(44, 95, 141, 0.4);
+    }
+    50% {
+        box-shadow: 
+            0 10px 25px rgba(44, 95, 141, 0.35),
+            0 0 20px 5px rgba(44, 95, 141, 0.3);
+    }
+}
+
+.detailHeaderCard {
+    animation: borderGlow 3s ease-in-out infinite;
+}
+
+/* Crystal Glass Effect for Info Cards */
+.infoCard {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9),
+        0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+.infoCard::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent,
+        rgba(44, 95, 141, 0.5),
+        transparent
+    );
+    animation: shimmerTop 3s ease-in-out infinite;
+}
+
+@keyframes shimmerTop {
+    0%, 100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Luxury Icon Animations */
+.infoIcon {
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.15));
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.infoCard:hover .infoIcon {
+    transform: scale(1.2) rotate(10deg);
+    filter: drop-shadow(0 5px 10px rgba(44, 95, 141, 0.4));
+}
+
+/* Premium Typography for Values */
+.infoValue {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    font-feature-settings: 'tnum';
+    font-variant-numeric: tabular-nums;
+}
+
+/* Holographic Effect for Order Number */
+.orderNumber {
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.9),
+        rgba(255, 255, 255, 1),
+        rgba(255, 255, 255, 0.9)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: white;
+    background-clip: text;
+    animation: holoShift 4s ease-in-out infinite;
+    background-size: 200% 200%;
+}
+
+@keyframes holoShift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Premium Tab Bar with Depth */
+.modernTabBar .sapMITBHead {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f8f9fa 100%);
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+.modernTabBar .sapMITBSelected {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2c5f8d 100%) !important;
+    box-shadow: 
+        0 -3px 10px rgba(44, 95, 141, 0.3),
+        0 5px 15px rgba(44, 95, 141, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    position: relative;
+}
+
+.modernTabBar .sapMITBSelected::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent,
+        rgba(255, 255, 255, 0.8),
+        transparent
+    );
+}
+
+/* Elite Table Headers with Gradient Mesh */
+.columnHeader,
+.tableColumnHeader {
+    position: relative;
+    overflow: visible;
+}
+
+.columnHeader::after,
+.tableColumnHeader::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(44, 95, 141, 0.6),
+        transparent
+    );
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.modernTable:hover .columnHeader::after,
+#salesOrderTable:hover .tableColumnHeader::after {
+    transform: scaleX(1);
+}
+
+/* Sophisticated Badge Styling */
+.statusBadge {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+/* Particle Background Animation */
+@keyframes particleAnimation {
+    0% {
+        transform: translateY(100vh) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.5;
+    }
+    90% {
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(-100vh) translateX(100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Elite Amount Display */
+.amountValue {
+    font-feature-settings: 'tnum', 'liga';
+    font-variant-numeric: tabular-nums lining-nums;
+    background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.9) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: white;
+    background-clip: text;
+}
+
+/* Premium Focus Ring */
+*:focus {
+    outline: 3px solid rgba(44, 95, 141, 0.4);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Luxury Transition for All Interactive Elements */
+.sapMBtn,
+.sapMInput,
+.sapMSelect,
+.sapMDP {
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.sapMBtn:hover,
+.sapMInput:hover,
+.sapMSelect:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* Elite KPI Number Animation */
+.sapMGT .sapMGTValue {
+    animation: countUp 1s ease-out;
+}
+
+@keyframes countUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Premium Divider Lines */
+.sectionContainer {
+    position: relative;
+}
+
+.sectionContainer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(44, 95, 141, 0.3),
+        transparent
+    );
+}
+
+/* Sophisticated Tooltip Styling */
+.sapMPopover {
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(10px);
+}
+
+/* Elite Message Toast */
+.sapMMessageToast {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2c5f8d 100%);
+    box-shadow: 
+        0 8px 25px rgba(44, 95, 141, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Premium Loading Indicator */
+.sapUiLocalBusyIndicator {
+    background: linear-gradient(135deg, rgba(44, 95, 141, 0.1), rgba(118, 75, 162, 0.1));
+    backdrop-filter: blur(5px);
+}
+
+/* Luxury Page Background */
+.sapMPage {
+    background: 
+        linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%),
+        repeating-linear-gradient(45deg,
+            transparent,
+            transparent 10px,
+            rgba(44, 95, 141, 0.02) 10px,
+            rgba(44, 95, 141, 0.02) 20px
+        );
+}
+
+/* Elite Search Field */
+#searchField {
+    transition: all 0.3s ease;
+}
+
+#searchField:focus-within {
+    transform: scale(1.02);
+    box-shadow: 
+        0 0 0 3px rgba(44, 95, 141, 0.2),
+        0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Premium Checkbox and Radio Buttons */
+.sapMCb,
+.sapMRb {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.sapMCb:hover,
+.sapMRb:hover {
+    filter: drop-shadow(0 3px 6px rgba(44, 95, 141, 0.3));
+}
+
+/* Sophisticated Filter Panel */
+.filterPanel {
+    position: relative;
+    overflow: hidden;
+}
+
+.filterPanel::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(44, 95, 141, 0.05), transparent 70%);
+    animation: rotateGlow 20s linear infinite;
+}
+
+@keyframes rotateGlow {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Fix overlapping effects and alignment issues */
+
+/* Remove conflicting ::before and ::after pseudo-elements */
+.modernListItem::before,
+.modernListItem::after {
+    display: none !important;
+}
+
+/* Clean base styling for list items */
+.modernListItem {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%) !important;
+    border-radius: 12px !important;
+    margin-bottom: 0.75rem !important;
+    padding: 0.75rem !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08) !important;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+    border-left: 4px solid transparent !important;
+    position: relative !important;
+    overflow: visible !important;
+}
+
+.modernListItem:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 8px 20px rgba(44, 95, 141, 0.2) !important;
+    border-left-color: #2c5f8d !important;
+    background: linear-gradient(135deg, #ffffff 0%, #f0f4ff 100%) !important;
+}
+
+/* Remove shimmer and particle effects */
+@keyframes shimmerEffect {
+    0%, 100% { opacity: 0; }
+}
+
+/* Clean badge styling without overlapping effects */
+.orderBadge::before,
+.salesOrgBadge::before,
+.orderTypeBadge::before {
+    display: none !important;
+}
+
+.orderBadge,
+.salesOrgBadge,
+.orderTypeBadge {
+    box-shadow: 0 3px 10px rgba(44, 95, 141, 0.25) !important;
+}
+
+/* Fix table cell alignment */
+.modernListItem .sapMListTblCell {
+    vertical-align: middle !important;
+    padding: 0.5rem !important;
+}
+
+/* Ensure VBox and HBox are properly aligned */
+.modernListItem VBox,
+.modernListItem HBox {
+    align-items: center !important;
+}
+
+/* Remove conflicting animations */
+.modernListItem:nth-child(n) {
+    animation: none !important;
+}
+
+/* Clean ripple effect */
+.modernListItem:active::before {
+    display: none !important;
+}
+
+/* Fix icon alignment */
+.modernListItem core\:Icon {
+    vertical-align: middle !important;
+    display: inline-flex !important;
+}
+
+/* Remove excessive glass morphism */
+.modernListItem::before {
+    content: none !important;
+}
+
+/* Simplify hover effects */
+.modernListItem core\:Icon {
+    transition: transform 0.3s ease !important;
+}
+
+.modernListItem:hover core\:Icon {
+    transform: scale(1.1) !important;
+}
+
+/* Remove light ray effect */
+.modernListItem::after {
+    content: none !important;
+}
+
+/* Clean focus state */
+.modernListItem:focus-within {
+    outline: 2px solid rgba(44, 95, 141, 0.3) !important;
+    outline-offset: 2px !important;
+    box-shadow: 0 0 0 3px rgba(44, 95, 141, 0.1) !important;
+}
+
+/* Fix customer cell alignment */
+.modernListItem .sapMListTblCell:nth-child(2) {
+    text-align: left !important;
+}
+
+/* Ensure proper text alignment in all cells */
+.modernListItem .sapMText {
+    line-height: 1.4 !important;
+    vertical-align: middle !important;
+}
+
+/* Remove border animation */
+.modernListItem {
+    border: 2px solid transparent !important;
+}
+
+.modernListItem:hover {
+    border-left: 4px solid #2c5f8d !important;
+    border-top: 2px solid transparent !important;
+    border-right: 2px solid transparent !important;
+    border-bottom: 2px solid transparent !important;
+}
+
+/* Fix stacking context */
+.modernListItem {
+    z-index: 1 !important;
+    isolation: isolate !important;
+}
+
+.modernListItem:hover {
+    z-index: 2 !important;
+}
+
+
+/* ============================================
+   ALIGNMENT FIXES FOR CLEAN PROFESSIONAL LOOK
+   ============================================ */
+
+/* Ensure table has proper spacing */
+#salesOrderTable .sapMListTbl {
+    border-collapse: separate !important;
+    border-spacing: 0 0.5rem !important;
+}
+
+/* Fix column widths to prevent wrapping */
+#salesOrderTable .sapMListTblRow {
+    display: table-row !important;
+}
+
+#salesOrderTable .sapMListTblCell {
+    display: table-cell !important;
+    vertical-align: middle !important;
+    padding: 0.75rem 0.5rem !important;
+}
+
+/* Fix text wrapping in cells */
+.customerIdText,
+.customerNamePlaceholder {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 100% !important;
+}
+
+/* Ensure badges don't overflow */
+.orderBadge,
+.salesOrgBadge,
+.orderTypeBadge {
+    display: inline-flex !important;
+    align-items: center !important;
+    white-space: nowrap !important;
+}
+
+/* Fix VBox height consistency */
+.modernListItem VBox {
+    min-height: auto !important;
+    justify-content: center !important;
+}
+
+/* Remove excess padding that causes misalignment */
+.itemsTabContent .modernTable .sapMListTblCell {
+    padding: 0.5rem 0.5rem !important;
+}
+
+/* Ensure consistent row height */
+.modernListItem {
+    min-height: 80px !important;
+    height: auto !important;
+}
+
+/* Fix amount bar container */
+.amountBar {
+    margin-top: 0.25rem !important;
+    width: 80px !important;
+}
+
+/* Clean hover without transform conflicts */
+.modernListItem:hover {
+    transform: translateY(-2px) !important;
+}
+
+/* Remove excessive effects */
+.statusIcon {
+    animation: none !important;
+}
+
+.statusIcon:hover {
+    transform: scale(1.1) !important;
+}
+
+/* Fix badge positioning */
+.orderBadge,
+.salesOrgBadge,
+.orderTypeBadge {
+    position: relative !important;
+    overflow: visible !important;
+}
+
+/* Ensure icons are centered */
+.modernListItem core\:Icon {
+    margin: 0 !important;
+}
+
+/* Fix customer name display */
+.modernListItem .sapMListTblCell:nth-child(2) VBox {
+    width: 100% !important;
+    max-width: 300px !important;
+}
+
+.customerNamePlaceholder {
+    display: block !important;
+    width: 100% !important;
+}
+
+/* Consistent spacing for all cells */
+.modernListItem .sapMListTblCell > VBox,
+.modernListItem .sapMListTblCell > HBox {
+    width: 100% !important;
+}
+
+/* Remove conflicting absolute positioning */
+.modernListItem * {
+    position: relative !important;
+}
+
+.modernListItem {
+    position: relative !important;
+}
+
+/* Clean border effect */
+.modernListItem {
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+    border-left: 4px solid transparent !important;
+}
+
+.modernListItem:hover {
+    border: 1px solid rgba(44, 95, 141, 0.2) !important;
+    border-left: 4px solid #2c5f8d !important;
+}
+
+/* Fix text alignment in badges */
+.orderNumberText,
+.salesOrgText,
+.orderTypeText {
+    line-height: 1 !important;
+}
+
+/* Ensure proper spacing between icon and text */
+.modernListItem HBox {
+    gap: 0.25rem !important;
+}
+
+/* Fix ObjectNumber alignment */
+.modernListItem .sapMObjectNumber {
+    text-align: right !important;
+}
+
+/* Remove all pseudo-element conflicts */
+.kpiTile::before,
+.infoCard::before,
+.filterPanel::before {
+    display: none !important;
+}
+
+/* Clean table appearance */
+#salesOrderTable {
+    transform: none !important;
+    perspective: none !important;
+}
+
+/* Simple clean shadows only */
+.modernListItem {
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.08),
+        0 1px 3px rgba(0, 0, 0, 0.04) !important;
+}
+
+.modernListItem:hover {
+    box-shadow: 
+        0 4px 12px rgba(44, 95, 141, 0.15),
+        0 2px 6px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Ensure cell content doesn't overflow */
+.modernListItem .sapMListTblCell * {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Fix date and created by columns */
+.dateText,
+.createdByText,
+.creationDateSubtext {
+    white-space: nowrap !important;
+}
+
+/* Ensure proper vertical centering */
+.modernListItem .sapMListTblCell {
+    vertical-align: middle !important;
+}
+
+.modernListItem .sapMListTblCell > * {
+    vertical-align: middle !important;
+}
+
+/* ============================================
+   OIL & GAS INDUSTRY THEME - COMPLETE REDESIGN
+   Remove all pink/rose colors, add industry colors
+   ============================================ */
+
+/* Replace Pink Type Badges with Industrial Blue-Gray */
+.orderTypeBadge {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%) !important;
+    color: white !important;
+    box-shadow: 0 3px 10px rgba(44, 62, 80, 0.3) !important;
+}
+
+.orderTypeBadge:hover {
+    background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%) !important;
+}
+
+/* Replace Pink Revenue Tile with Industrial Teal */
+.kpiTileGreen {
+    background: linear-gradient(135deg, #16a085 0%, #1abc9c 100%) !important;
+}
+
+/* Replace Orange with Deep Blue for Industrial Look */
+.kpiTileOrange {
+    background: linear-gradient(135deg, #2980b9 0%, #3498db 100%) !important;
+}
+
+/* Oil & Gas Industry Color Palette */
+:root {
+    --oil-dark-blue: #1e3a5f;
+    --oil-steel-blue: #2c5f8d;
+    --oil-teal: #16a085;
+    --oil-orange: #d35400;
+    --oil-gold: #f39c12;
+    --oil-steel-gray: #34495e;
+    --oil-charcoal: #2c3e50;
+    --gas-green: #27ae60;
+}
+
+/* Sales Org Badge - Change from Yellow to Steel Blue */
+.salesOrgBadge {
+    background: linear-gradient(135deg, #2c5f8d 0%, #3498db 100%) !important;
+    box-shadow: 0 3px 10px rgba(44, 95, 141, 0.3) !important;
+}
+
+.salesOrgText {
+    color: white !important;
+}
+
+/* Deal Number - Change from Pink to Deep Orange (Oil Industry) */
+.dealNumber {
+    color: #d35400 !important;
+}
+
+/* Created By - Change from Purple to Teal */
+.createdByText {
+    color: #16a085 !important;
+}
+
+/* Remove pink from ObjectStatus */
+.sapMObjectStatus[state="Success"] {
+    color: #27ae60 !important;
+}
+
+/* Type badges in table - Dark Blue instead of Pink */
+.orderTypeText {
+    color: white !important;
+}
+
+/* Shipping Point - Keep Blue but make it Steel Blue */
+.shippingPoint {
+    color: #2c5f8d !important;
+}
+
+/* Header gradient - Oil Industry Colors */
+.detailHeaderCard {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2c5f8d 100%) !important;
+}
+
+/* Tab Bar - Industry Colors */
+.modernTabBar .sapMITBSelected {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2c5f8d 100%) !important;
+}
+
+/* Table Headers - Oil Industry Blue */
+#salesOrderTable .sapMListTblHeaderCell {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2c5f8d 100%) !important;
+}
+
+/* Order Badge - Deep Blue instead of Purple */
+.orderBadge {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2c5f8d 100%) !important;
+}
+
+/* Remove all pink/magenta references */
+.cardOrange {
+    border-left: 3px solid #2980b9 !important;
+}
+
+/* Icons - Industry appropriate colors */
+.modernListItem core\:Icon[src*="tag"] {
+    color: #2c5f8d !important;
+}
+
+
+/* ============================================
+   OIL & GAS INDUSTRY ANIMATIONS
+   Trucks, oil derricks, pipelines, barrels
+   ============================================ */
+
+/* Truck Animation - Left to Right (truck flipped to face right) */
+@keyframes truckDrive {
+    0% {
+        transform: translateX(-150px) scaleX(-1);
+        opacity: 0;
+    }
+    5% {
+        opacity: 0.8;
+    }
+    95% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateX(calc(100vw + 50px)) scaleX(-1);
+        opacity: 0;
+    }
+}
+
+/* Truck removed from detail page - only show on list page */
+
+/* Oil Derrick Pump Animation (Nodding Motion) */
+@keyframes pumpJack {
+    0%, 100% {
+        transform: rotate(0deg);
+        transform-origin: bottom center;
+    }
+    50% {
+        transform: rotate(-15deg);
+        transform-origin: bottom center;
+    }
+}
+
+/* Add oil derrick icon with pumping animation */
+.kpiContainer::before {
+    content: '🛢️';
+    position: absolute;
+    top: -30px;
+    left: 20px;
+    font-size: 1.5rem;
+    animation: pumpJack 3s ease-in-out infinite;
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+/* Pipeline Flow Animation */
+@keyframes pipelineFlow {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 100% 0%;
+    }
+}
+
+/* Add pipeline flow effect to table borders */
+#salesOrderTable {
+    position: relative;
+    z-index: 1;
+}
+
+/* Table container for truck animation */
+#tableContainer {
+    position: relative;
+    overflow: visible !important;
+}
+
+/* Truck overlay - on list page above sales order table */
+.tableSection {
+    position: relative;
+}
+
+.tableSection::before {
+    content: '🚛';
+    position: absolute;
+    top: 5px;
+    left: 0;
+    font-size: 3rem;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 999999 !important;
+    animation: truckDrive 15s linear infinite;
+    animation-delay: 1s;
+}
+
+/* Truck overlay - on detail page above Order Line Items table */
+.itemsTabContent {
+    position: relative;
+}
+
+.itemsTabContent::before {
+    content: '🚛';
+    position: absolute;
+    top: 10px;
+    left: 0;
+    font-size: 3rem;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 999999 !important;
+    animation: truckDrive 15s linear infinite;
+    animation-delay: 2s;
+}
+
+#salesOrderTable::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: repeating-linear-gradient(
+        90deg,
+        var(--oil-steel-blue) 0px,
+        var(--oil-steel-blue) 10px,
+        transparent 10px,
+        transparent 20px
+    );
+    background-size: 40px 3px;
+    animation: pipelineFlow 2s linear infinite;
+    opacity: 0.5;
+    z-index: 1;
+}
+
+/* Barrel Rolling Animation */
+@keyframes barrelRoll {
+    0% {
+        transform: translateX(0) rotate(0deg);
+    }
+    100% {
+        transform: translateX(100px) rotate(360deg);
+    }
+}
+
+/* Add subtle barrel animation to amount section */
+.amountContainer {
+    position: relative;
+    overflow: visible;
+}
+
+.amountContainer::before {
+    content: '🛢️';
+    position: absolute;
+    top: -5px;
+    right: -25px;
+    font-size: 1.2rem;
+    opacity: 0.15;
+    animation: barrelRoll 20s linear infinite;
+    pointer-events: none;
+}
+
+/* Oil Drop Animation */
+@keyframes oilDrop {
+    0% {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+}
+
+/* Natural Gas Flame Flicker */
+@keyframes gasFlame {
+    0%, 100% {
+        opacity: 0.6;
+        transform: scale(1) translateY(0);
+    }
+    25% {
+        opacity: 0.8;
+        transform: scale(1.1) translateY(-2px);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(0.9) translateY(2px);
+    }
+    75% {
+        opacity: 0.9;
+        transform: scale(1.05) translateY(-1px);
+    }
+}
+
+/* Add gas flame icon to status indicators */
+.statusSuccess::after {
+    content: '🔥';
+    margin-left: 5px;
+    animation: gasFlame 2s ease-in-out infinite;
+    font-size: 0.8rem;
+}
+
+/* Industrial Gauge Needle Animation */
+@keyframes gaugeNeedle {
+    0%, 100% {
+        transform: rotate(-45deg);
+    }
+    50% {
+        transform: rotate(45deg);
+    }
+}
+
+/* Pressure Gauge Visual */
+.kpiTileOrange::after,
+.kpiTileGreen::after {
+    content: '⚙️';
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 2rem;
+    opacity: 0.15;
+    animation: gaugeNeedle 4s ease-in-out infinite;
+    transform-origin: center center;
+}
+
+/* Refinery Tower Smoke */
+@keyframes smokeRise {
+    0% {
+        transform: translateY(0) scale(0.8);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.3;
+    }
+    100% {
+        transform: translateY(-100px) scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* Add smoke effect to page header */
+.page::before {
+    content: '💨';
+    position: fixed;
+    top: 0;
+    right: 20%;
+    font-size: 1.5rem;
+    animation: smokeRise 8s ease-out infinite;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+}
+
+/* Tanker Ship Animation */
+@keyframes shipSail {
+    0% {
+        transform: translateX(-150px) translateY(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.4;
+    }
+    50% {
+        transform: translateY(-3px);
+    }
+    90% {
+        opacity: 0.4;
+    }
+    100% {
+        transform: translateX(calc(100vw + 150px)) translateY(0);
+        opacity: 0;
+    }
+}
+
+/* Oil Platform Animation */
+@keyframes platformFloat {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-3px) rotate(-1deg);
+    }
+    75% {
+        transform: translateY(3px) rotate(1deg);
+    }
+}
+
+/* Industrial Conveyor Belt Animation */
+@keyframes conveyorBelt {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 100% 0%;
+    }
+}
+
+/* Add conveyor effect to progress bars */
+.amountBar {
+    position: relative;
+    overflow: hidden;
+}
+
+.amountBarFillHigh::after,
+.amountBarFillMedium::after,
+.amountBarFillLow::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 5px,
+        rgba(255, 255, 255, 0.1) 5px,
+        rgba(255, 255, 255, 0.1) 10px
+    );
+    background-size: 20px 20px;
+    animation: conveyorBelt 1.5s linear infinite;
+}
+
+/* Drilling Rig Rotation */
+@keyframes drillRotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Fuel Gauge Indicator */
+@keyframes fuelLevel {
+    0%, 100% {
+        transform: scaleY(0.6);
+    }
+    50% {
+        transform: scaleY(1);
+    }
+}
+
+/* Industrial Valve Turn */
+@keyframes valveTurn {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(90deg);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    75% {
+        transform: rotate(270deg);
+    }
+}
+
+/* Add valve icon to filter sections */
+.filterPanel::before {
+    content: '⚙️';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.2rem;
+    opacity: 0.2;
+    animation: valveTurn 8s steps(4) infinite;
+}
+
+/* Oil Well Gusher Effect (subtle) */
+@keyframes gusher {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.5;
+        transform: translateY(-50px) scale(1.2);
+    }
+    100% {
+        transform: translateY(-100px) scale(0.8);
+        opacity: 0;
+    }
+}
+
+/* Industrial Meter Reading Pulse */
+@keyframes meterPulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 0 10px rgba(46, 204, 113, 0);
+    }
+}
+
+.kpiValue {
+    animation: meterPulse 2s ease-in-out infinite;
+}
+
+/* Tanker Truck on List Page */
+.modernListItem:nth-child(5n)::before {
+    content: '🚚';
+    position: absolute;
+    top: 50%;
+    left: -50px;
+    font-size: 1.5rem;
+    opacity: 0;
+    animation: truckDrive 30s linear infinite;
+    animation-delay: 2s;
+    transform: translateY(-50%);
+    z-index: -1;
+}
+
+/* Oil Rig Silhouette on KPI Cards */
+.kpiTileOrange,
+.kpiTileGreen {
+    position: relative;
+    overflow: hidden;
+}
+
+.kpiTileOrange::before {
+    content: '🏗️';
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    font-size: 4rem;
+    opacity: 0.08;
+    transform: rotate(-15deg);
+}
+
+/* Pipeline Network Background */
+.sectionContainer {
+    position: relative;
+}
+
+.sectionContainer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        linear-gradient(90deg, transparent 48%, var(--oil-steel-blue) 48%, var(--oil-steel-blue) 52%, transparent 52%),
+        linear-gradient(0deg, transparent 48%, var(--oil-steel-blue) 48%, var(--oil-steel-blue) 52%, transparent 52%);
+    background-size: 100px 100px;
+    opacity: 0.02;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Industrial Warning Stripes */
+@keyframes warningStripe {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 40px 0;
+    }
+}
+
+/* Pressure Indicator Glow */
+@keyframes pressureGlow {
+    0%, 100% {
+        box-shadow: 0 0 5px var(--oil-teal);
+    }
+    50% {
+        box-shadow: 0 0 20px var(--oil-teal), 0 0 30px var(--oil-teal);
+    }
+}
+
+.amountNumberLarge[state="Success"] {
+    animation: pressureGlow 3s ease-in-out infinite;
+}
+
+/* Refinery Complex Background Pattern */
+body {
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect fill="none" stroke="%231e3a5f" stroke-width="0.5" opacity="0.05" x="50" y="50" width="100" height="100"/><circle fill="none" stroke="%232c5f8d" stroke-width="0.5" opacity="0.05" cx="100" cy="100" r="40"/></svg>');
+    background-size: 200px 200px;
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Loading State - Oil Barrel Spin */
+@keyframes barrelSpin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.sapMBusyIndicator::before {
+    content: '🛢️';
+    position: absolute;
+    font-size: 2rem;
+    animation: barrelSpin 2s linear infinite;
+}
+
+/* Industrial Achievement Badge */
+@keyframes achievementGlow {
+    0%, 100% {
+        filter: drop-shadow(0 0 5px var(--oil-gold));
+    }
+    50% {
+        filter: drop-shadow(0 0 15px var(--oil-gold)) drop-shadow(0 0 25px var(--oil-gold));
+    }
+}
+
+/* Subtle hover effects for rows showing activity */
+.modernListItem:hover::after {
+    content: '⚡';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1rem;
+    opacity: 0.3;
+    animation: gasFlame 1s ease-in-out infinite;
 }

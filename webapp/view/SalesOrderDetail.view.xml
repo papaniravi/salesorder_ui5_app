@@ -3,118 +3,394 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
     xmlns:f="sap.ui.layout.form"
+    xmlns:layout="sap.ui.layout"
+    xmlns:core="sap.ui.core"
     displayBlock="true">
     <Page
         id="salesOrderDetailPage"
-        title="{i18n>salesOrderDetailTitle}"
+        title="Sales Order Details"
         showNavButton="true"
-        navButtonPress=".onNavBack">
+        navButtonPress=".onNavBack"
+        class="detailPage">
         <content>
-            <ObjectHeader
-                id="salesOrderHeader"
-                title="{SalesOrder}"
-                number="{
-                    path: 'TotalNetAmount',
-                    type: 'sap.ui.model.type.Float',
-                    formatOptions: {
-                        maxFractionDigits: 2,
-                        minFractionDigits: 2
-                    }
-                }"
-                numberUnit="{TransactionCurrency}">
-                <attributes>
-                    <ObjectAttribute title="{i18n>customerLabel}" text="{SoldToParty}"/>
-                    <ObjectAttribute title="{i18n>orderDateLabel}" text="{
-                        path: 'SalesOrderDate',
-                        type: 'sap.ui.model.type.Date',
-                        formatOptions: {
-                            pattern: 'dd/MM/yyyy'
-                        }
-                    }"/>
-                    <ObjectAttribute title="{i18n>orderTypeLabel}" text="{SalesOrderType}"/>
-                </attributes>
-            </ObjectHeader>
+            <!-- Enhanced Header Card with 3D Effect -->
+            <VBox class="detailHeaderCard">
+                <HBox justifyContent="SpaceBetween" alignItems="Start" class="headerContent">
+                    <VBox>
+                        <Title text="{SalesOrder}" level="H1" class="orderNumber"/>
+                        <Text text="{SalesOrderType}" class="orderType"/>
+                    </VBox>
+                    <VBox alignItems="End" class="amountContainer">
+                        <VBox alignItems="End">
+                            <Text text="Total Amount" class="amountLabel"/>
+                            <HBox alignItems="Baseline">
+                                <Text text="{
+                                    path: 'TotalNetAmount',
+                                    type: 'sap.ui.model.type.Float',
+                                    formatOptions: {
+                                        maxFractionDigits: 2,
+                                        minFractionDigits: 2,
+                                        groupingEnabled: true
+                                    }
+                                }" class="amountValue"/>
+                                <Text text=" {TransactionCurrency}" class="amountCurrency"/>
+                            </HBox>
+                        </VBox>
+                        <HBox class="statusBadge">
+                            <core:Icon src="sap-icon://status-positive" color="#28a745" class="sapUiTinyMarginEnd"/>
+                            <Text text="Active" class="statusText"/>
+                        </HBox>
+                    </VBox>
+                </HBox>
 
-            <IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
+                <!-- Quick Info Cards - Vertical Stack -->
+                <VBox class="quickInfoCards">
+                    <HBox class="infoCard cardBlue" alignItems="Center">
+                        <core:Icon src="sap-icon://customer" class="infoIcon"/>
+                        <VBox class="sapUiTinyMarginBegin">
+                            <Label text="Customer" class="infoLabel"/>
+                            <Text id="customerText" text="{SoldToParty}" class="infoValue"/>
+                        </VBox>
+                    </HBox>
+                    <HBox class="infoCard cardGreen" alignItems="Center">
+                        <core:Icon src="sap-icon://calendar" class="infoIcon"/>
+                        <VBox class="sapUiTinyMarginBegin">
+                            <Label text="Order Date" class="infoLabel"/>
+                            <Text text="{
+                                path: 'SalesOrderDate',
+                                type: 'sap.ui.model.type.Date',
+                                formatOptions: {
+                                    pattern: 'dd/MM/yyyy'
+                                }
+                            }" class="infoValue"/>
+                        </VBox>
+                    </HBox>
+                    <HBox class="infoCard cardOrange" alignItems="Center">
+                        <core:Icon src="sap-icon://org-chart" class="infoIcon"/>
+                        <VBox class="sapUiTinyMarginBegin">
+                            <Label text="Sales Organization" class="infoLabel"/>
+                            <Text text="{SalesOrganization}" class="infoValue"/>
+                        </VBox>
+                    </HBox>
+                </VBox>
+            </VBox>
+
+            <!-- Modern Tab Bar with 3D Effects -->
+            <IconTabBar id="iconTabBar" class="modernTabBar">
                 <items>
-                    <IconTabFilter text="{i18n>detailsTab}" key="details">
-                        <f:SimpleForm
-                            editable="false"
-                            layout="ResponsiveGridLayout"
-                            labelSpanXL="4"
-                            labelSpanL="4"
-                            labelSpanM="4"
-                            labelSpanS="12"
-                            adjustLabelSpan="false"
-                            emptySpanXL="0"
-                            emptySpanL="0"
-                            emptySpanM="0"
-                            emptySpanS="0"
-                            columnsXL="2"
-                            columnsL="2"
-                            columnsM="1"
-                            singleContainerFullSize="false">
-                            <f:content>
-                                <Label text="{i18n>salesOrderLabel}"/>
-                                <Text text="{SalesOrder}"/>
+                    <IconTabFilter text="Details" key="details" icon="sap-icon://detail-view">
+                        <VBox class="detailTabContent">
+                            <!-- Sales Header Information Section -->
+                            <VBox class="sectionContainer">
+                                <HBox class="sectionHeader">
+                                    <core:Icon src="sap-icon://sales-order" color="#667eea" class="sectionIcon"/>
+                                    <Title text="Sales Header Information" level="H3" class="sectionTitle"/>
+                                </HBox>
+                                <layout:Grid defaultSpan="XL6 L6 M12 S12" class="detailsGrid">
+                                <VBox class="detailField">
+                                    <Label text="Sales Order" class="fieldLabel"/>
+                                    <HBox alignItems="Center">
+                                        <core:Icon src="sap-icon://sales-order" color="#0070f2" class="sapUiTinyMarginEnd"/>
+                                        <Text text="{SalesOrder}" class="fieldValue"/>
+                                    </HBox>
+                                </VBox>
 
-                                <Label text="{i18n>soldToPartyLabel}"/>
-                                <Text text="{SoldToParty}"/>
+                                <VBox class="detailField">
+                                    <Label text="Sold-to Party" class="fieldLabel"/>
+                                    <HBox alignItems="Center">
+                                        <core:Icon src="sap-icon://customer" color="#28a745" class="sapUiTinyMarginEnd"/>
+                                        <Text text="{SoldToParty}" class="fieldValue"/>
+                                    </HBox>
+                                </VBox>
 
-                                <Label text="{i18n>purchaseOrderLabel}"/>
-                                <Text text="{PurchaseOrderByCustomer}"/>
+                                <VBox class="detailField">
+                                    <Label text="Customer PO" class="fieldLabel"/>
+                                    <HBox alignItems="Center">
+                                        <core:Icon src="sap-icon://document" color="#ff9800" class="sapUiTinyMarginEnd"/>
+                                        <Text text="{PurchaseOrderByCustomer}" class="fieldValue"/>
+                                    </HBox>
+                                </VBox>
 
-                                <Label text="{i18n>salesOrgLabel}"/>
-                                <Text text="{SalesOrganization}"/>
+                                <VBox class="detailField">
+                                    <Label text="Sales Organization" class="fieldLabel"/>
+                                    <HBox alignItems="Center">
+                                        <core:Icon src="sap-icon://org-chart" color="#e91e63" class="sapUiTinyMarginEnd"/>
+                                        <Text text="{SalesOrganization}" class="fieldValue"/>
+                                    </HBox>
+                                </VBox>
 
-                                <Label text="{i18n>distributionChannelLabel}"/>
-                                <Text text="{DistributionChannel}"/>
+                                <VBox class="detailField">
+                                    <Label text="Distribution Channel" class="fieldLabel"/>
+                                    <HBox alignItems="Center">
+                                        <core:Icon src="sap-icon://chain-link" color="#9c27b0" class="sapUiTinyMarginEnd"/>
+                                        <Text text="{DistributionChannel}" class="fieldValue"/>
+                                    </HBox>
+                                </VBox>
 
-                                <Label text="{i18n>divisionLabel}"/>
-                                <Text text="{OrganizationDivision}"/>
-                            </f:content>
-                        </f:SimpleForm>
+                                <VBox class="detailField">
+                                    <Label text="Division" class="fieldLabel"/>
+                                    <HBox alignItems="Center">
+                                        <core:Icon src="sap-icon://group-2" color="#3f51b5" class="sapUiTinyMarginEnd"/>
+                                        <Text text="{OrganizationDivision}" class="fieldValue"/>
+                                    </HBox>
+                                </VBox>
+                            </layout:Grid>
+                            </VBox>
+                        </VBox>
                     </IconTabFilter>
 
-                    <IconTabFilter text="{i18n>itemsTab}" key="items">
-                        <Table
-                            items="{path: 'to_Item'}">
-                            <columns>
-                                <Column>
-                                    <Text text="{i18n>itemColumn}"/>
-                                </Column>
-                                <Column>
-                                    <Text text="{i18n>materialColumn}"/>
-                                </Column>
-                                <Column hAlign="End">
-                                    <Text text="{i18n>quantityColumn}"/>
-                                </Column>
-                                <Column hAlign="End">
-                                    <Text text="{i18n>netPriceColumn}"/>
-                                </Column>
-                            </columns>
-                            <items>
-                                <ColumnListItem>
-                                    <cells>
-                                        <Text text="{SalesOrderItem}"/>
-                                        <Text text="{Material}"/>
-                                        <ObjectNumber
-                                            number="{RequestedQuantity}"
-                                            unit="{RequestedQuantityUnit}"/>
-                                        <ObjectNumber
-                                            number="{
-                                                path: 'NetAmount',
-                                                type: 'sap.ui.model.type.Float',
-                                                formatOptions: {
-                                                    maxFractionDigits: 2,
-                                                    minFractionDigits: 2
-                                                }
-                                            }"
-                                            unit="{TransactionCurrency}"/>
-                                    </cells>
-                                </ColumnListItem>
-                            </items>
-                        </Table>
+                    <IconTabFilter text="Items" key="items" icon="sap-icon://product">
+                        <ScrollContainer height="600px" width="100%" vertical="true" horizontal="false">
+                        <VBox class="itemsTabContent">
+                            <!-- Items Table -->
+                            <VBox class="sectionContainer">
+                            <Table
+                                id="itemsTable"
+                                items="{path: 'itemModel>/SalesOrderItems'}"
+                                class="modernTable"
+                                mode="SingleSelectMaster"
+                                selectionChange=".onItemSelectionChange">
+                                <headerToolbar>
+                                    <OverflowToolbar class="tableHeaderToolbar">
+                                        <Title text="Order Line Items" level="H2" class="tableHeaderTitle"/>
+                                        <ToolbarSpacer/>
+                                        <Label text="{= ${itemModel>/SalesOrderItems}.length + ' Items'}" class="itemCountLabel"/>
+                                    </OverflowToolbar>
+                                </headerToolbar>
+                                <columns>
+                                    <Column width="6%" hAlign="Center">
+                                        <Text text="Item #" class="columnHeader"/>
+                                    </Column>
+                                    <Column width="18%">
+                                        <Text text="Material &amp; Description" class="columnHeader"/>
+                                    </Column>
+                                    <Column width="14%">
+                                        <Text text="Plant" class="columnHeader"/>
+                                    </Column>
+                                    <Column hAlign="End" width="10%">
+                                        <Text text="Quantity" class="columnHeader"/>
+                                    </Column>
+                                    <Column hAlign="End" width="10%">
+                                        <Text text="Unit Price" class="columnHeader"/>
+                                    </Column>
+                                    <Column hAlign="End" width="10%">
+                                        <Text text="Net Amount" class="columnHeader"/>
+                                    </Column>
+                                    <Column hAlign="Center" width="10%">
+                                        <Text text="Deal Number" class="columnHeader"/>
+                                    </Column>
+                                    <Column hAlign="Center" width="10%">
+                                        <Text text="Shipping Point" class="columnHeader"/>
+                                    </Column>
+                                    <Column hAlign="Center" width="12%">
+                                        <Text text="Logistics Info" class="columnHeader"/>
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem class="modernTableRow">
+                                        <cells>
+                                            <HBox alignItems="Center" justifyContent="Center">
+                                                <core:Icon src="sap-icon://numbered-text" color="#667eea" size="0.7rem" class="sapUiTinyMarginEnd"/>
+                                                <Text text="{itemModel>SalesOrderItem}" class="itemNumber"/>
+                                            </HBox>
+
+                                            <VBox>
+                                                <HBox alignItems="Center" class="sapUiTinyMarginBottom">
+                                                    <core:Icon src="sap-icon://product" color="#0070f2" size="0.7rem" class="sapUiTinyMarginEnd"/>
+                                                    <Text text="{itemModel>Material}" class="materialText"/>
+                                                </HBox>
+                                                <Text text="{= ${itemModel>SalesOrderItemText} || 'No Description' }" class="itemDescription"/>
+                                                <Label text="{= 'Group: ' + (${itemModel>MaterialGroup} || 'N/A') }" class="itemSubtext"/>
+                                            </VBox>
+
+                                            <VBox>
+                                                <HBox alignItems="Center" class="sapUiTinyMarginBottom">
+                                                    <core:Icon src="sap-icon://factory" color="#28a745" size="0.7rem" class="sapUiTinyMarginEnd"/>
+                                                    <Text text="{itemModel>Plant}" class="plantCode"/>
+                                                </HBox>
+                                                <Text text="{= ${itemModel>PlantName} || 'N/A' }" class="plantName"/>
+                                            </VBox>
+
+                                            <ObjectNumber
+                                                number="{itemModel>RequestedQuantity}"
+                                                unit="{itemModel>RequestedQuantityUnit}"
+                                                class="quantityNumber"/>
+
+                                            <ObjectNumber
+                                                number="{= ${itemModel>RequestedQuantity} > 0 ? (${itemModel>NetAmount} / ${itemModel>RequestedQuantity}).toFixed(2) : 0 }"
+                                                unit="{itemModel>TransactionCurrency}"
+                                                class="unitPriceNumber"/>
+
+                                            <ObjectNumber
+                                                number="{
+                                                    path: 'itemModel>NetAmount',
+                                                    type: 'sap.ui.model.type.Float',
+                                                    formatOptions: {
+                                                        maxFractionDigits: 2,
+                                                        minFractionDigits: 2
+                                                    }
+                                                }"
+                                                unit="{itemModel>TransactionCurrency}"
+                                                state="Success"
+                                                class="priceNumber"/>
+
+                                            <VBox alignItems="Center">
+                                                <core:Icon src="sap-icon://business-card" color="#e91e63" size="0.7rem" class="sapUiTinyMarginBottom"/>
+                                                <Text text="{= ${itemModel>DealNumber} || 'N/A' }" class="dealNumber"/>
+                                            </VBox>
+
+                                            <VBox alignItems="Center">
+                                                <core:Icon src="sap-icon://shipping-status" color="#667eea" size="0.7rem" class="sapUiTinyMarginBottom"/>
+                                                <Text text="{= ${itemModel>ShippingPoint} || 'N/A' }" class="shippingPoint"/>
+                                            </VBox>
+
+                                            <VBox>
+                                                <HBox alignItems="Center" class="sapUiTinyMarginBottom">
+                                                    <core:Icon src="sap-icon://shipping-status" color="#ff9800" size="0.65rem" class="sapUiTinyMarginEnd"/>
+                                                    <Text text="{= 'Mode: ' + (${itemModel>ModeOfTransport} || 'N/A') }" class="logisticsText"/>
+                                                </HBox>
+                                                <Text text="{= 'BOL: ' + (${itemModel>ExternalBoL} || 'N/A') }" class="logisticsSubtext"/>
+                                                <Text text="{= 'ID: ' + (${itemModel>LogisticsID} || 'N/A') }" class="logisticsSubtext"/>
+                                            </VBox>
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                            </VBox>
+
+                            <!-- Schedule Line Table -->
+                            <VBox id="scheduleLineSection" class="sectionContainer sapUiMediumMarginTop" visible="false">
+                                <Table
+                                    id="scheduleLineTable"
+                                    class="modernTable scheduleLineTable"
+                                    mode="None"
+                                    growing="true"
+                                    growingThreshold="10"
+                                    noDataText="Select an item to view schedule lines">
+                                    <headerToolbar>
+                                        <OverflowToolbar class="tableHeaderToolbar">
+                                            <Title id="scheduleLineTitle" text="Schedule Line Items" level="H2" class="tableHeaderTitle"/>
+                                            <ToolbarSpacer/>
+                                        </OverflowToolbar>
+                                    </headerToolbar>
+                                    <columns>
+                                        <Column width="10%" hAlign="Center">
+                                            <Text text="Line #" class="columnHeader"/>
+                                        </Column>
+                                        <Column width="15%" hAlign="Center">
+                                            <Text text="Delivery Date" class="columnHeader"/>
+                                        </Column>
+                                        <Column width="12%" hAlign="End">
+                                            <Text text="Order Qty" class="columnHeader"/>
+                                        </Column>
+                                        <Column width="12%" hAlign="End">
+                                            <Text text="Confirmed Qty" class="columnHeader"/>
+                                        </Column>
+                                        <Column width="13%" hAlign="End">
+                                            <Text text="Corrected Qty" class="columnHeader"/>
+                                        </Column>
+                                        <Column width="13%" hAlign="End">
+                                            <Text text="Delivered Qty" class="columnHeader"/>
+                                        </Column>
+                                        <Column width="12%" hAlign="Center">
+                                            <Text text="Unit" class="columnHeader"/>
+                                        </Column>
+                                        <Column width="13%" hAlign="Center">
+                                            <Text text="Status" class="columnHeader"/>
+                                        </Column>
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem class="tableRow">
+                                            <cells>
+                                                <VBox alignItems="Center" class="sapUiTinyMarginTop">
+                                                    <HBox alignItems="Center">
+                                                        <core:Icon src="sap-icon://numbered-text" color="#667eea" size="1rem" class="sapUiTinyMarginEnd"/>
+                                                        <Text text="{ScheduleLine}" class="itemNumber"/>
+                                                    </HBox>
+                                                </VBox>
+
+                                                <VBox alignItems="Center">
+                                                    <core:Icon src="sap-icon://date-time" color="#667eea" class="sapUiTinyMarginBottom"/>
+                                                    <Text text="{
+                                                        path: 'ConfirmedDeliveryDate',
+                                                        type: 'sap.ui.model.type.Date',
+                                                        formatOptions: {
+                                                            style: 'medium'
+                                                        }
+                                                    }" class="deliveryDate"/>
+                                                </VBox>
+
+                                                <VBox alignItems="End">
+                                                    <ObjectNumber
+                                                        number="{
+                                                            path: 'ScheduleLineOrderQuantity',
+                                                            type: 'sap.ui.model.type.Float',
+                                                            formatOptions: {
+                                                                maxFractionDigits: 3,
+                                                                minFractionDigits: 0
+                                                            }
+                                                        }"
+                                                        class="quantityNumber"/>
+                                                </VBox>
+
+                                                <VBox alignItems="End">
+                                                    <ObjectNumber
+                                                        number="{
+                                                            path: 'ConfdOrderQtyByMatlAvailCheck',
+                                                            type: 'sap.ui.model.type.Float',
+                                                            formatOptions: {
+                                                                maxFractionDigits: 3,
+                                                                minFractionDigits: 0
+                                                            }
+                                                        }"
+                                                        class="quantityNumber"
+                                                        state="{= ${ConfdOrderQtyByMatlAvailCheck} >= ${ScheduleLineOrderQuantity} ? 'Success' : 'Warning' }"/>
+                                                </VBox>
+
+                                                <VBox alignItems="End">
+                                                    <ObjectNumber
+                                                        number="{
+                                                            path: 'CorrectedQtyInOrderQtyUnit',
+                                                            type: 'sap.ui.model.type.Float',
+                                                            formatOptions: {
+                                                                maxFractionDigits: 3,
+                                                                minFractionDigits: 0
+                                                            }
+                                                        }"
+                                                        class="quantityNumber"/>
+                                                </VBox>
+
+                                                <VBox alignItems="End">
+                                                    <ObjectNumber
+                                                        number="{
+                                                            path: 'DeliveredQtyInOrderQtyUnit',
+                                                            type: 'sap.ui.model.type.Float',
+                                                            formatOptions: {
+                                                                maxFractionDigits: 3,
+                                                                minFractionDigits: 0
+                                                            }
+                                                        }"
+                                                        class="quantityNumber"
+                                                        state="{= ${DeliveredQtyInOrderQtyUnit} >= ${ScheduleLineOrderQuantity} ? 'Success' : 'None' }"/>
+                                                </VBox>
+
+                                                <VBox alignItems="Center">
+                                                    <Text text="{OrderQuantityUnit}" class="unitText"/>
+                                                </VBox>
+
+                                                <VBox alignItems="Center">
+                                                    <ObjectStatus
+                                                        text="{= ${DeliveredQtyInOrderQtyUnit} >= ${ScheduleLineOrderQuantity} ? 'Delivered' : ${ConfdOrderQtyByMatlAvailCheck} > 0 ? 'Confirmed' : 'Planned' }"
+                                                        state="{= ${DeliveredQtyInOrderQtyUnit} >= ${ScheduleLineOrderQuantity} ? 'Success' : ${ConfdOrderQtyByMatlAvailCheck} > 0 ? 'Warning' : 'None' }"
+                                                        icon="{= ${DeliveredQtyInOrderQtyUnit} >= ${ScheduleLineOrderQuantity} ? 'sap-icon://status-positive' : ${ConfdOrderQtyByMatlAvailCheck} > 0 ? 'sap-icon://pending' : 'sap-icon://calendar' }"/>
+                                                </VBox>
+                                            </cells>
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+                            </VBox>
+                        </VBox>
+                        </ScrollContainer>
                     </IconTabFilter>
                 </items>
             </IconTabBar>

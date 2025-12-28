@@ -16,6 +16,20 @@
         "settings": {
           "odataVersion": "2.0"
         }
+      },
+      "itemService": {
+        "uri": "/sap/opu/odata/sap/ZC_P2P_SALES_ORDER_INFO/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0"
+        }
+      },
+      "businessPartnerService": {
+        "uri": "/sap/opu/odata/sap/API_BUSINESS_PARTNER/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0"
+        }
       }
     }
   },
@@ -65,6 +79,24 @@
           "defaultBindingMode": "TwoWay",
           "defaultCountMode": "Inline",
           "useBatch": true
+        }
+      },
+      "itemModel": {
+        "dataSource": "itemService",
+        "preload": true,
+        "settings": {
+          "defaultBindingMode": "TwoWay",
+          "defaultCountMode": "Inline",
+          "useBatch": true
+        }
+      },
+      "bpModel": {
+        "dataSource": "businessPartnerService",
+        "preload": false,
+        "settings": {
+          "defaultBindingMode": "OneWay",
+          "defaultCountMode": "None",
+          "useBatch": false
         }
       }
     },

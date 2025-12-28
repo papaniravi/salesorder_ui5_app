@@ -46,38 +46,16 @@ sap.ui.define([
         },
 
         _calculateKPIsFromTable: function() {
+            // This function is kept for backward compatibility but mainly
+            // relies on the _updateKPIs function through dataReceived event
+            // Just trigger a refresh to ensure dataReceived fires
             var oTable = this.byId("salesOrderTable");
             if (!oTable) return;
 
-            var aItems = oTable.getItems();
-            if (!aItems || aItems.length === 0) return;
+            var oBinding = oTable.getBinding("items");
+            if (!oBinding) return;
 
-            var iTotalOrders = aItems.length;
-            var fTotalRevenue = 0;
-            var aCustomers = [];
-
-            aItems.forEach(function(oItem) {
-                var oContext = oItem.getBindingContext();
-                if (oContext) {
-                    var oData = oContext.getObject();
-                    if (oData.TotalNetAmount) {
-                        fTotalRevenue += parseFloat(oData.TotalNetAmount);
-                    }
-                    if (oData.SoldToParty && aCustomers.indexOf(oData.SoldToParty) === -1) {
-                        aCustomers.push(oData.SoldToParty);
-                    }
-                }
-            });
-
-            var fAvgOrderValue = iTotalOrders > 0 ? fTotalRevenue / iTotalOrders : 0;
-
-            var oViewModel = this.getView().getModel("viewModel");
-            oViewModel.setData({
-                totalOrders: iTotalOrders,
-                totalRevenue: Math.round(fTotalRevenue),
-                avgOrderValue: Math.round(fAvgOrderValue),
-                totalCustomers: aCustomers.length
-            });
+            // The dataReceived event will handle the KPI update
         },
 
         _updateKPIs: function (oEvent) {
@@ -87,14 +65,16 @@ sap.ui.define([
             // Get the total count from __count if available (for filtered results)
             var iTotalOrders = oData && oData.__count ? parseInt(oData.__count) : aData.length;
 
+            var oViewModel = this.getView().getModel("viewModel");
+
+            // If no data, reset all KPIs to 0
             if (!aData || aData.length === 0) {
-                // If no data, still update with count if available
-                if (iTotalOrders > 0) {
-                    var oViewModel = this.getView().getModel("viewModel");
-                    var currentData = oViewModel.getData();
-                    currentData.totalOrders = iTotalOrders;
-                    oViewModel.setData(currentData);
-                }
+                oViewModel.setData({
+                    totalOrders: 0,
+                    totalRevenue: 0,
+                    avgOrderValue: 0,
+                    totalCustomers: 0
+                });
                 return;
             }
 
@@ -112,13 +92,70 @@ sap.ui.define([
 
             var fAvgOrderValue = aData.length > 0 ? fTotalRevenue / aData.length : 0;
 
-            var oViewModel = this.getView().getModel("viewModel");
             oViewModel.setData({
                 totalOrders: iTotalOrders,
                 totalRevenue: Math.round(fTotalRevenue),
                 avgOrderValue: Math.round(fAvgOrderValue),
                 totalCustomers: aCustomers.length
             });
+
+            // Load customer names for visible items
+            this._loadCustomerNames();
+        },
+
+        _loadCustomerNames: function() {
+            var oTable = this.byId("salesOrderTable");
+            if (!oTable) return;
+
+            var aItems = oTable.getItems();
+            var oBPModel = this.getOwnerComponent().getModel("bpModel");
+            if (!oBPModel) return;
+
+            var oCustomerCache = this._oCustomerCache || {};
+            this._oCustomerCache = oCustomerCache;
+
+            aItems.forEach(function(oItem) {
+                var oContext = oItem.getBindingContext();
+                if (!oContext) return;
+
+                var sCustomerId = oContext.getProperty("SoldToParty");
+                if (!sCustomerId) return;
+
+                // Skip if already loaded
+                if (oCustomerCache[sCustomerId]) {
+                    this._updateCustomerCell(oItem, sCustomerId, oCustomerCache[sCustomerId]);
+                    return;
+                }
+
+                // Load customer name
+                oBPModel.read("/A_Customer('" + sCustomerId + "')", {
+                    success: function(oData) {
+                        var sCustomerName = oData.CustomerName || oData.BPCustomerName || sCustomerId;
+                        oCustomerCache[sCustomerId] = sCustomerName;
+                        this._updateCustomerCell(oItem, sCustomerId, sCustomerName);
+                    }.bind(this),
+                    error: function() {
+                        // Keep customer ID if name lookup fails
+                        oCustomerCache[sCustomerId] = sCustomerId;
+                    }
+                });
+            }.bind(this));
+        },
+
+        _updateCustomerCell: function(oItem, sCustomerId, sCustomerName) {
+            var aCells = oItem.getCells();
+            if (aCells && aCells.length > 1) {
+                var oCustomerCell = aCells[1]; // Customer is second cell
+                if (oCustomerCell && oCustomerCell.getItems) {
+                    var aItems = oCustomerCell.getItems();
+                    if (aItems && aItems.length > 1) {
+                        var oText = aItems[1]; // Text is second item in HBox
+                        if (oText && oText.setText) {
+                            oText.setText(sCustomerId + " - " + sCustomerName);
+                        }
+                    }
+                }
+            }
         },
 
         onKPIPress: function (oEvent) {
@@ -164,10 +201,16 @@ sap.ui.define([
                 aFilters.push(new Filter("SalesOrganization", FilterOperator.Contains, sSalesOrg));
             }
             if (oCreatedOnFrom) {
-                aFilters.push(new Filter("CreationDate", FilterOperator.GE, oCreatedOnFrom));
+                // Set time to start of day (00:00:00)
+                var oFromDate = new Date(oCreatedOnFrom);
+                oFromDate.setHours(0, 0, 0, 0);
+                aFilters.push(new Filter("SalesOrderDate", FilterOperator.GE, oFromDate));
             }
             if (oCreatedOnTo) {
-                aFilters.push(new Filter("CreationDate", FilterOperator.LE, oCreatedOnTo));
+                // Set time to end of day (23:59:59)
+                var oToDate = new Date(oCreatedOnTo);
+                oToDate.setHours(23, 59, 59, 999);
+                aFilters.push(new Filter("SalesOrderDate", FilterOperator.LE, oToDate));
             }
             if (sOrderType) {
                 aFilters.push(new Filter("SalesOrderType", FilterOperator.EQ, sOrderType));
@@ -178,10 +221,8 @@ sap.ui.define([
             var oBinding = oTable.getBinding("items");
             oBinding.filter(aFilters);
 
-            // Recalculate KPIs after filtering
-            setTimeout(function() {
-                this._calculateKPIsFromTable();
-            }.bind(this), 300);
+            // KPIs will be updated automatically by the dataReceived event
+            MessageToast.show("Filters applied");
         },
 
         onFilterClear: function() {
@@ -199,10 +240,8 @@ sap.ui.define([
             var oBinding = oTable.getBinding("items");
             oBinding.filter([]);
 
-            // Recalculate KPIs
-            setTimeout(function() {
-                this._calculateKPIsFromTable();
-            }.bind(this), 300);
+            // KPIs will be updated automatically by the dataReceived event
+            MessageToast.show("Filters cleared");
         },
 
         onSearch: function (oEvent) {
@@ -224,10 +263,7 @@ sap.ui.define([
             var oBinding = oTable.getBinding("items");
             oBinding.filter(aFilters);
 
-            // Recalculate KPIs after search
-            setTimeout(function() {
-                this._calculateKPIsFromTable();
-            }.bind(this), 300);
+            // KPIs will be updated automatically by the dataReceived event
         },
 
         onItemPress: function (oEvent) {
@@ -354,6 +390,124 @@ sap.ui.define([
 
             var oBinding = oEvent.getSource().getBinding("items");
             oBinding.filter([oFilter]);
+        },
+
+        // Formatter for document category types
+        formatDocumentCategory: function(sCategory) {
+            if (!sCategory) {
+                return "N/A";
+            }
+
+            var oDocumentTypes = {
+                "A": "Inquiry",
+                "B": "Quotation",
+                "C": "Sales Order",
+                "D": "Item Proposal",
+                "E": "Scheduling Agreement",
+                "F": "Scheduling Agreement with Release Documentation",
+                "G": "Contract",
+                "H": "Return",
+                "I": "Order",
+                "J": "Delivery",
+                "K": "Returns Delivery for Order",
+                "L": "Delivery for Project",
+                "M": "Invoice",
+                "N": "Invoice Cancellation",
+                "O": "Credit Memo",
+                "P": "Debit Memo",
+                "Q": "Pro Forma Invoice",
+                "R": "WMS Transfer Order",
+                "S": "Transfer Requirement",
+                "T": "Delivery for Purchasing",
+                "U": "Returns Delivery for Purchasing",
+                "V": "Purchase Order",
+                "W": "Independent Requirements",
+                "X": "Handling Unit",
+                "Y": "Goods Receipt",
+                "Z": "Billing Document Request",
+                "0": "Master Contract",
+                "1": "Scheduling Agreement Release",
+                "2": "External Requirement",
+                "3": "Storage Location Rule",
+                "4": "Batch Derivation",
+                "5": "Display Picking",
+                "6": "Delivery",
+                "7": "Shipment",
+                "8": "Sales Order Item",
+                "9": "Project",
+                "!": "Material Determination",
+                "\"": "Sales Deal",
+                "#": "Promotion",
+                "$": "Listing",
+                "%": "Listing Exclusion",
+                "&": "Shipment Costs",
+                "'": "Shipping Unit",
+                "(": "Packing Instruction",
+                ")": "Warehouse Request",
+                "*": "Shipment Request",
+                "+": "Outbound Delivery for Returns",
+                ",": "Returns Material Authorization",
+                "-": "Returns Delivery",
+                ".": "Credit Memo Request",
+                "/": "Debit Memo Request",
+                ":": "Subsequent Outbound Delivery",
+                ";": "Subsequent Billing Document",
+                "<": "Stock Transfer Order",
+                "=": "Stock Transport Order",
+                ">": "Replenishment Delivery",
+                "?": "Cross-Company Stock Transfer",
+                "@": "Service Order",
+                "[": "Service Confirmation",
+                "\\": "Service Entry Sheet",
+                "]": "Quality Notification",
+                "^": "Maintenance Order",
+                "_": "Equipment",
+                "`": "Functional Location",
+                "{": "Production Order",
+                "|": "Process Order",
+                "}": "Planned Order",
+                "~": "Purchase Requisition",
+                "f001": "Standard Order",
+                "f002": "Rush Order",
+                "f003": "Consignment Fill-up",
+                "f004": "Consignment Pick-up",
+                "CEM": "Customer Equipment Material",
+                "BOS": "Bill of Services",
+                "TA": "Standard Sales Order",
+                "OR": "Standard Order",
+                "RE": "Returns",
+                "CR": "Credit Memo Request",
+                "DR": "Debit Memo Request",
+                "KB": "Consignment Fill-Up",
+                "KE": "Consignment Issue",
+                "KA": "Consignment Pick-Up"
+            };
+
+            return oDocumentTypes[sCategory] || sCategory;
+        },
+
+        // Get first preceding document
+        getFirstPrecedingDoc: function(aPrecedingDocs) {
+            if (aPrecedingDocs && aPrecedingDocs.length > 0) {
+                var oDoc = aPrecedingDocs[0];
+                return {
+                    number: oDoc.PrecedingDocument || "N/A",
+                    category: this.formatDocumentCategory(oDoc.PrecedingDocumentCategory)
+                };
+            }
+            return { number: "None", category: "" };
+        },
+
+        // Get first subsequent document
+        getFirstSubsequentDoc: function(aSubsequentDocs) {
+            if (aSubsequentDocs && aSubsequentDocs.length > 0) {
+                var oDoc = aSubsequentDocs[0];
+                return {
+                    number: oDoc.SubsequentDocument || "N/A",
+                    category: this.formatDocumentCategory(oDoc.SubsequentDocumentCategory)
+                };
+            }
+            return { number: "None", category: "" };
         }
     });
 });
