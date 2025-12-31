@@ -377,7 +377,6 @@
     padding: 0.25rem 0.6rem;
     border-radius: 12px;
     margin-top: 0.25rem;
-    backdrop-filter: blur(10px);
     display: inline-flex;
     align-items: center;
     gap: 0.3rem;
@@ -1944,10 +1943,6 @@
     font-family: 'Segoe UI', -apple-system, system-ui, sans-serif;
     font-weight: 800;
     letter-spacing: -0.5px;
-    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
 }
 
 /* Sophisticated Hover State for Entire Row */
